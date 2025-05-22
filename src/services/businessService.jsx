@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabaseClient.jsx';
 const ALL_BUSINESS_FIELDS = 'id, nombre, descripcion, categoria, direccion, whatsapp, imagen_url, logo_url, web, hours, gallery_images, menu, telefono, plan_type, video_embed_url, mapa_embed_url, created_at, instagram, facebook, services';
 
 export const fetchBusinessesByCategory = async (categoryName) => {
+  // Usamos 'categoria' directamente porque no existe 'slug_categoria' en la tabla
   const { data, error } = await supabase
     .from('negocios')
     .select(ALL_BUSINESS_FIELDS)

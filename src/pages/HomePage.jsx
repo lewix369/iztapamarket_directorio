@@ -23,6 +23,7 @@ const HomePage = () => {
     alert(`Buscando: ${searchTerm}`);
   };
 
+  console.log("Categorías cargadas:", categories);
   return (
     <motion.div 
       initial={{ opacity: 0 }}

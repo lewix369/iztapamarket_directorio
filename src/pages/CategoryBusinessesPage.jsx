@@ -11,6 +11,16 @@ import SeoManager from '@/components/SeoManager.jsx';
 import { useBusinessesLoader } from '@/hooks/category_page/useBusinessesLoader.jsx';
 import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx';
 
+const slugToCategoria = {
+  tecnologia: 'tecnología',
+  alimentos: 'alimentos',
+  belleza: 'belleza',
+  moda: 'moda',
+  servicios: 'servicios',
+  autos: 'autos',
+  educacion: 'educación',
+};
+
 const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
   const location = useLocation();
@@ -21,22 +31,23 @@ const CategoryBusinessesPage = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const category = useMemo(() => {
-    const foundCategory = allCategories.find(cat => cat.slug === categorySlug);
+    const normalizedSlug = slugToCategoria[categorySlug] || categorySlug;
+    const foundCategory = allCategories.find(cat => cat.slug === normalizedSlug);
     if (foundCategory) {
       return foundCategory;
     }
 
-    const capitalizedName = categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1).replace(/-/g, ' ');
+    const capitalizedName = normalizedSlug.charAt(0).toUpperCase() + normalizedSlug.slice(1).replace(/-/g, ' ');
     return { 
       name: capitalizedName, 
-      slug: categorySlug, 
+      slug: normalizedSlug, 
       description: `Explora negocios en ${capitalizedName}`, 
       icon: defaultCategoryIcon, 
       dbName: capitalizedName
     };
   }, [categorySlug]);
 
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.name);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {
