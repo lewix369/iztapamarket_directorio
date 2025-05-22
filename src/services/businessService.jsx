@@ -7,7 +7,7 @@ export const fetchBusinessesByCategory = async (categoryName) => {
   const { data, error } = await supabase
     .from('negocios')
     .select(ALL_BUSINESS_FIELDS)
-    .ilike('categoria', `%${categoryName}%`)
+    .eq('categoria', categoryName)
     .order('created_at', { ascending: false });
 
   if (error) {

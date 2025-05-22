@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { useToast } from "@/components/ui/use-toast.jsx";
 import { fetchBusinessesByCategory, formatBusinessData } from '@/services/businessService.jsx';
