@@ -1,11 +1,5 @@
-
-
 {
   "rewrites": [
-    { "source": "/categorias/:path*", "destination": "/" },
-    { "source": "/planes", "destination": "/" },
-    { "source": "/contacto", "destination": "/" },
-    { "source": "/anunciar", "destination": "/" },
     { "source": "/(.*)", "destination": "/" }
   ]
 }
