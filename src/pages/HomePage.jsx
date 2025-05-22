@@ -43,7 +43,8 @@ const HomePage = () => {
           <img 
             alt="IztapaMarket Logo Principal - Directorio de Negocios en Iztapalapa"
             className="mx-auto h-36 sm:h-44 md:h-52 lg:h-60 w-auto mb-8"
-           src={iztapaMarketHeroLogoUrl} />
+            src={iztapaMarketHeroLogoUrl}
+          />
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary mb-4 px-2 text-center">
             Impulsa tu negocio local en Iztapalapa
           </h1>
