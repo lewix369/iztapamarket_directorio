@@ -12,13 +12,13 @@ import { useBusinessesLoader } from '@/hooks/category_page/useBusinessesLoader.j
 import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx';
 
 const slugToCategoria = {
-  tecnologia: 'tecnología',
+  tecnologia: 'tecnologia',
   alimentos: 'alimentos',
   belleza: 'belleza',
   moda: 'moda',
   servicios: 'servicios',
   autos: 'autos',
-  educacion: 'educación',
+  educacion: 'educacion',
 };
 
 const CategoryBusinessesPage = () => {
@@ -42,12 +42,12 @@ const CategoryBusinessesPage = () => {
       name: capitalizedName, 
       slug: normalizedSlug, 
       description: `Explora negocios en ${capitalizedName}`, 
-      icon: defaultCategoryIcon, 
-      dbName: capitalizedName
+      icon: defaultCategoryIcon,
+      dbName: normalizedSlug // Ensures lowercase, no accent, to match Supabase slug_categoria
     };
   }, [categorySlug]);
 
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.name);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {

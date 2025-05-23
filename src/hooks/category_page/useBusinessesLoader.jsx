@@ -2,49 +2,48 @@ import { useState, useEffect, useCallback } from 'react';
 import { useToast } from "@/components/ui/use-toast.jsx";
 import { fetchBusinessesByCategory, formatBusinessData } from '@/services/businessService.jsx';
 
-export const useBusinessesLoader = (category) => {
+export const useBusinessesLoader = (slugCategoria) => {
   const [businesses, setBusinesses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { toast } = useToast();
 
   const loadBusinesses = useCallback(async () => {
-    if (!category || (!category.dbName && !category.name)) {
+    if (!slugCategoria) {
       setIsLoading(false);
-      setError("Categoría no definida correctamente.");
-      console.error("Error en useBusinessesLoader: Categoría no definida.", category);
+      setError("Slug de categoría no definido.");
+      console.error("Error en useBusinessesLoader: Slug de categoría no definido.", slugCategoria);
       return;
     }
 
     setIsLoading(true);
     setError(null);
-    
-    const supabaseCategoryName = category.dbName || category.name;
-    console.log(`Fetching businesses for category: '${supabaseCategoryName}' (derived from slug: ${category.slug})`);
+
+    console.log(`Fetching businesses for slug_categoria: '${slugCategoria}'`);
 
     try {
-      const rawData = await fetchBusinessesByCategory(supabaseCategoryName);
-      console.log(`Raw data for ${supabaseCategoryName}:`, rawData);
-      
-      const formattedData = rawData.map(b => formatBusinessData(b, category.name));
+      const rawData = await fetchBusinessesByCategory(slugCategoria.toLowerCase());
+      console.log(`Raw data for ${slugCategoria}:`, rawData);
+
+      const formattedData = rawData.map(b => formatBusinessData(b));
       setBusinesses(formattedData);
 
       if (formattedData.length === 0) {
-        console.log(`No businesses found for category: ${supabaseCategoryName}`);
+        console.log(`No businesses found for slug_categoria: ${slugCategoria}`);
       }
 
     } catch (fetchError) {
       setError(fetchError.message);
       toast({
         title: "Error de Carga",
-        description: `No se pudieron cargar los negocios de ${category.name}. Detalles: ${fetchError.message}`,
+        description: `No se pudieron cargar los negocios de ${slugCategoria}. Detalles: ${fetchError.message}`,
         variant: "destructive",
       });
-      console.error(`Error loading businesses for ${category.name}:`, fetchError);
+      console.error(`Error loading businesses for ${slugCategoria}:`, fetchError);
     } finally {
       setIsLoading(false);
     }
-  }, [category, toast]);
+  }, [slugCategoria, toast]);
 
   useEffect(() => {
     loadBusinesses();
