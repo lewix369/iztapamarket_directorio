@@ -1,23 +1,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'node:path';
 
 export default defineConfig({
-  base: './', // 👈 CLAVE para Vercel y dominios personalizados
+  base: "/", // Esta línea es clave para despliegues en Vercel
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
   build: {
     outDir: 'dist',
-    sourcemap: false,
-    emptyOutDir: true,
     rollupOptions: {
       output: {
-        manualChunks: undefined,
-      },
-    },
-  },
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          supabase: ['@supabase/supabase-js'],
+          radix: ['@radix-ui/react-toast', '@radix-ui/react-dialog', '@radix-ui/react-checkbox'],
+          vendor: ['framer-motion', 'clsx', 'lucide-react']
+        }
+      }
+    }
+  }
 });
