@@ -37,7 +37,7 @@ const CategoryBusinessesPage = () => {
     };
   }, [categorySlug]);
 
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.dbName);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.slug);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {
