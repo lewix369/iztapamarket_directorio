@@ -11,16 +11,6 @@ import SeoManager from '@/components/SeoManager.jsx';
 import { useBusinessesLoader } from '@/hooks/category_page/useBusinessesLoader.jsx';
 import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx';
 
-const slugToCategoria = {
-  tecnologia: 'tecnologia',
-  alimentos: 'alimentos',
-  belleza: 'belleza',
-  moda: 'moda',
-  servicios: 'servicios',
-  autos: 'autos',
-  educacion: 'educacion',
-};
-
 const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
   const location = useLocation();
@@ -31,23 +21,23 @@ const CategoryBusinessesPage = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const category = useMemo(() => {
-    const normalizedSlug = slugToCategoria[categorySlug] || categorySlug;
+    const normalizedSlug = categorySlug?.toLowerCase();
     const foundCategory = allCategories.find(cat => cat.slug === normalizedSlug);
     if (foundCategory) {
       return foundCategory;
     }
 
     const capitalizedName = normalizedSlug.charAt(0).toUpperCase() + normalizedSlug.slice(1).replace(/-/g, ' ');
-    return { 
-      name: capitalizedName, 
-      slug: normalizedSlug, 
-      description: `Explora negocios en ${capitalizedName}`, 
+    return {
+      name: capitalizedName,
+      slug: normalizedSlug,
+      description: `Explora negocios en ${capitalizedName}`,
       icon: defaultCategoryIcon,
-      dbName: normalizedSlug // Ensures lowercase, no accent, to match Supabase slug_categoria
+      dbName: normalizedSlug.toLowerCase()
     };
   }, [categorySlug]);
 
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.dbName);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {

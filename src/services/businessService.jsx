@@ -6,7 +6,7 @@ export const fetchBusinessesByCategory = async (categoryName) => {
   const { data, error } = await supabase
     .from('negocios')
     .select(ALL_BUSINESS_FIELDS)
-    .eq('slug_categoria', categoryName.toLowerCase())
+    .eq('slug_categoria', categoryName)
     .order('created_at', { ascending: false });
 
   if (error) {
@@ -37,7 +37,7 @@ export const fetchRelatedBusinesses = async (categoryName, currentBusinessId, li
   const { data, error } = await supabase
     .from('negocios')
     .select(ALL_BUSINESS_FIELDS)
-    .eq('slug_categoria', categoryName.toLowerCase())
+    .eq('slug_categoria', categoryName)
     .neq('id', currentBusinessId)
     .order('created_at', { ascending: false })
     .limit(limit);
