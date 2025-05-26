@@ -14,13 +14,8 @@ import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx
 const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
 
-  if (!categorySlug) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-2xl font-bold text-red-600">Error: Slug de categoría inválido</h1>
-        <p className="text-gray-700 mt-2">Por favor, selecciona una categoría válida desde el menú de navegación.</p>
-      </div>
-    );
+  if (!categorySlug || typeof categorySlug !== 'string') {
+    return <Navigate to="/categorias" replace />;
   }
 
   const location = useLocation();
