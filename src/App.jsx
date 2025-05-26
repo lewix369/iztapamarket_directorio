@@ -37,7 +37,6 @@ function App() {
 			<Layout>
 				<Routes>
 					<Route path="/" element={<PageWrapper title="Directorio de Negocios en Iztapalapa" description="Encuentra y anuncia negocios locales en Iztapalapa. Taquerías, servicios, tiendas y más. ¡Impulsa tu visibilidad!" canonicalPath="/"><HomePage /></PageWrapper>} />
-					<Route path="/categorias" element={<PageWrapper title="Categorías de Negocios" description="Explora todas las categorías de negocios en Iztapalapa: alimentos, belleza, servicios, moda y más." canonicalPath="/categorias"><CategoriesPage /></PageWrapper>} />
 					<Route 
 					  path="/categorias/:categorySlug" 
 					  element={
@@ -49,6 +48,7 @@ function App() {
 					    </PageWrapper>
 					  } 
 					/>
+					<Route path="/categorias" element={<PageWrapper title="Categorías de Negocios" description="Explora todas las categorías de negocios en Iztapalapa: alimentos, belleza, servicios, moda y más." canonicalPath="/categorias"><CategoriesPage /></PageWrapper>} />
 					<Route
 					  path="/categorias/"
 					  element={<Navigate to="/categorias" replace />}
