@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -18,7 +17,7 @@ const BusinessCard = ({ business, className = '' }) => {
 
   const { 
     id, 
-    name, 
+    nombre, 
     description, 
     category, 
     address, 
@@ -60,10 +59,10 @@ const BusinessCard = ({ business, className = '' }) => {
       >
         <Card className="h-full flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl border border-border/20 bg-card text-card-foreground">
           <div className="relative aspect-[16/10] overflow-hidden">
-            <Link to={`/negocio/${id}`} aria-label={`Ver detalles de ${name}`}>
+            <Link to={`/negocio/${id}`} aria-label={`Ver detalles de ${nombre}`}>
               <img  
                 class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                alt={`Imagen de ${name}`} src="https://images.unsplash.com/photo-1556491251-781a951fbc79" />
+                alt={`Imagen de ${nombre}`} src="https://images.unsplash.com/photo-1556491251-781a951fbc79" />
             </Link>
             {categoryDisplay && CategoryIconComponent && (
               <div className="absolute top-3 right-3 bg-primary/80 backdrop-blur-sm text-primary-foreground px-3 py-1.5 rounded-full text-xs font-semibold flex items-center shadow-md">
@@ -73,8 +72,8 @@ const BusinessCard = ({ business, className = '' }) => {
           </div>
 
           <CardContent className="p-5 flex flex-col flex-grow">
-            <h3 className="text-xl lg:text-2xl font-bold text-primary mb-2 truncate" title={name}>
-              <Link to={`/negocio/${id}`} className="hover:underline">{name}</Link>
+            <h3 className="text-xl lg:text-2xl font-bold text-primary mb-2 truncate" title={nombre}>
+              <Link to={`/negocio/${id}`} className="hover:underline">{nombre}</Link>
             </h3>
             
             {address && (
@@ -96,14 +95,14 @@ const BusinessCard = ({ business, className = '' }) => {
 
             <div className="mt-auto space-y-2.5">
               <Button asChild variant="default" className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:scale-[1.02]">
-                <Link to={`/negocio/${id}`} aria-label={`Conocer más sobre ${name}`}>
+                <Link to={`/negocio/${id}`} aria-label={`Conocer más sobre ${nombre}`}>
                   Conocer Más <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
 
               {whatsapp && (
                 <Button asChild variant="outline" className="w-full border-green-500 text-green-600 hover:bg-green-500/10 hover:text-green-700 font-semibold shadow-sm transition-all duration-300 ease-in-out transform hover:scale-[1.02]">
-                  <a href={`https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Hola,%20vi%20tu%20negocio%20${encodeURIComponent(name)}%20en%20IztapaMarket%20y%20quisiera%20más%20información.`} target="_blank" rel="noopener noreferrer" aria-label={`Pedir por WhatsApp a ${name}`}>
+                  <a href={`https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Hola,%20vi%20tu%20negocio%20${encodeURIComponent(nombre)}%20en%20IztapaMarket%20y%20quisiera%20más%20información.`} target="_blank" rel="noopener noreferrer" aria-label={`Pedir por WhatsApp a ${nombre}`}>
                     <MessageSquare className="mr-2 h-4 w-4" /> Pedir por WhatsApp
                   </a>
                 </Button>
@@ -111,7 +110,7 @@ const BusinessCard = ({ business, className = '' }) => {
 
               {showVideoLink && (
                  <Button asChild variant="outline" className="w-full border-red-500 text-red-600 hover:bg-red-500/10 hover:text-red-700 font-semibold shadow-sm transition-all duration-300 ease-in-out transform hover:scale-[1.02]">
-                  <a href={videoEmbedUrl} target="_blank" rel="noopener noreferrer" aria-label={`Ver video de ${name} en YouTube`}>
+                  <a href={videoEmbedUrl} target="_blank" rel="noopener noreferrer" aria-label={`Ver video de ${nombre} en YouTube`}>
                     <Youtube className="mr-2 h-4 w-4" /> Ver Video
                   </a>
                 </Button>
@@ -131,9 +130,9 @@ const BusinessCard = ({ business, className = '' }) => {
         <Dialog open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <DialogContent className="sm:max-w-[425px] bg-background text-foreground rounded-lg shadow-xl border-border">
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-primary">Menú de {name}</DialogTitle>
+              <DialogTitle className="text-2xl font-bold text-primary">Menú de {nombre}</DialogTitle>
               <DialogDescription>
-                Descubre los deliciosos platillos que {name} tiene para ofrecer.
+                Descubre los deliciosos platillos que {nombre} tiene para ofrecer.
               </DialogDescription>
             </DialogHeader>
             <div className="max-h-[60vh] overflow-y-auto py-4 space-y-3 pr-2">

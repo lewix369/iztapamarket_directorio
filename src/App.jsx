@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import HomePage from '@/pages/HomePage';
 import CategoriesPage from '@/pages/CategoriesPage';
@@ -49,6 +48,10 @@ function App() {
 					      <CategoryBusinessesPage />
 					    </PageWrapper>
 					  } 
+					/>
+					<Route
+					  path="/categorias/"
+					  element={<Navigate to="/categorias" replace />}
 					/>
 					<Route path="/negocio/:id" element={<PageWrapper><BusinessDetailsPage /></PageWrapper>} />
 					<Route path="/registrarse" element={<PageWrapper title="Registra tu Negocio" description="Añade tu negocio al directorio IztapaMarket. Aumenta tu visibilidad y conecta con clientes locales." canonicalPath="/registrarse"><RegisterBusinessPage /></PageWrapper>} />

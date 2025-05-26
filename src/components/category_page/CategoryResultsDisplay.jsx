@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Loader2, AlertTriangle, Search } from 'lucide-react';
 import { Button } from "@/components/ui/button.jsx";
@@ -41,6 +40,19 @@ const CategoryResultsDisplay = ({
     );
   }
 
+  if (!Array.isArray(businesses)) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col items-center justify-center min-h-[300px] bg-yellow-100 text-yellow-800 p-6 rounded-lg text-center border border-dashed border-yellow-400"
+      >
+        <h3 className="text-xl font-semibold mb-2">Error de Formato</h3>
+        <p>La estructura de datos recibida no es válida. Esperábamos una lista de negocios.</p>
+      </motion.div>
+    );
+  }
+
   if (businesses.length === 0) {
     return (
       <motion.div
@@ -65,6 +77,8 @@ const CategoryResultsDisplay = ({
     );
   }
 
+  console.log("✅ Negocios recibidos para renderizar:", businesses);
+  console.log("📊 Lista final de negocios recibida para renderizar:", businesses);
   return <BusinessList businesses={businesses} />;
 };
 

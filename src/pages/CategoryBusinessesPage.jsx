@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Navigate } from 'react-router-dom';
 import { categories as allCategories, defaultCategoryIcon } from '@/data/categories.jsx';
 import { SlidersHorizontal } from 'lucide-react';
 import { Button } from "@/components/ui/button.jsx";
@@ -13,6 +13,16 @@ import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx
 
 const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
+
+  if (!categorySlug) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-2xl font-bold text-red-600">Error: Slug de categoría inválido</h1>
+        <p className="text-gray-700 mt-2">Por favor, selecciona una categoría válida desde el menú de navegación.</p>
+      </div>
+    );
+  }
+
   const location = useLocation();
   
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,7 +47,9 @@ const CategoryBusinessesPage = () => {
     };
   }, [categorySlug]);
 
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.slug);
+  console.log("🧠 Slug recibido desde el componente:", category.dbName);
+  console.log("🧩 Slug final enviado al hook desde la página:", category.dbName);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {
