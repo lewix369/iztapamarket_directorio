@@ -48,10 +48,17 @@ function App() {
 					    </PageWrapper>
 					  } 
 					/>
-					<Route path="/categorias" element={<PageWrapper title="Categorías de Negocios" description="Explora todas las categorías de negocios en Iztapalapa: alimentos, belleza, servicios, moda y más." canonicalPath="/categorias"><CategoriesPage /></PageWrapper>} />
-					<Route
-					  path="/categorias/"
-					  element={<Navigate to="/categorias" replace />}
+					<Route 
+					  path="/categorias"
+					  element={
+					    <PageWrapper
+					      title="Categorías de Negocios"
+					      description="Explora todas las categorías de negocios en Iztapalapa: alimentos, belleza, servicios, moda y más."
+					      canonicalPath="/categorias"
+					    >
+					      <CategoriesPage />
+					    </PageWrapper>
+					  }
 					/>
 					<Route path="/negocio/:id" element={<PageWrapper><BusinessDetailsPage /></PageWrapper>} />
 					<Route path="/registrarse" element={<PageWrapper title="Registra tu Negocio" description="Añade tu negocio al directorio IztapaMarket. Aumenta tu visibilidad y conecta con clientes locales." canonicalPath="/registrarse"><RegisterBusinessPage /></PageWrapper>} />

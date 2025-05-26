@@ -14,7 +14,8 @@ import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx
 const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
 
-  if (!categorySlug || typeof categorySlug !== 'string') {
+  const validCategorySlugs = allCategories.map(cat => cat.slug);
+  if (!categorySlug || !validCategorySlugs.includes(categorySlug)) {
     return <Navigate to="/categorias" replace />;
   }
 
@@ -26,21 +27,12 @@ const CategoryBusinessesPage = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const category = useMemo(() => {
-    const normalizedSlug = categorySlug?.toLowerCase();
-    const foundCategory = allCategories.find(cat => cat.slug === normalizedSlug);
-    if (foundCategory) {
-      return foundCategory;
-    }
-
-    const capitalizedName = normalizedSlug.charAt(0).toUpperCase() + normalizedSlug.slice(1).replace(/-/g, ' ');
-    return {
-      name: capitalizedName,
-      slug: normalizedSlug,
-      description: `Explora negocios en ${capitalizedName}`,
-      icon: defaultCategoryIcon,
-      dbName: normalizedSlug.toLowerCase()
-    };
+    return allCategories.find(cat => cat.slug === categorySlug);
   }, [categorySlug]);
+
+  if (!category) {
+    return <Navigate to="/categorias" replace />;
+  }
 
   console.log("🧠 Slug recibido desde el componente:", category.dbName);
   console.log("🧩 Slug final enviado al hook desde la página:", category.dbName);

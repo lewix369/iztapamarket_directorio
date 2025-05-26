@@ -15,8 +15,6 @@ const CategoriesPage = () => {
     },
   };
 
-  console.log("Categorías recibidas:", categories);
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <motion.div
@@ -40,17 +38,14 @@ const CategoriesPage = () => {
         animate="visible"
       >
         {categories && categories.length > 0 ? (
-          categories.map((category, index) => {
-            console.log("Renderizando categoría:", category.slug); // <-- línea nueva para debug
-            return (
-              <CategoryCard 
-                key={category.slug} 
-                category={category} 
-                isFullPage={true} 
-                index={index} 
-              />
-            );
-          })
+          categories.map((category, index) => (
+            <CategoryCard 
+              key={category.slug} 
+              category={category} 
+              isFullPage={true} 
+              index={index} 
+            />
+          ))
         ) : (
           <p className="text-center col-span-full text-gray-500">
             No se encontraron categorías disponibles.
