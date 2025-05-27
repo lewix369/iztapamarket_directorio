@@ -14,6 +14,7 @@ import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx
 const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
 
+  if (!allCategories || allCategories.length === 0) return <Navigate to="/categorias" replace />;
   const validCategorySlugs = allCategories.map(cat => cat.slug);
   if (!categorySlug || !validCategorySlugs.includes(categorySlug)) {
     return <Navigate to="/categorias" replace />;
@@ -35,13 +36,17 @@ const CategoryBusinessesPage = () => {
   }
 
   console.log("📦 Slug recibido desde URL:", categorySlug);
-  console.log("🔁 Slug enviado al hook:", category.dbName);
+  if (category) {
+    console.log("🔁 Slug enviado al hook:", category.dbName);
+  }
   const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.dbName);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {
-    console.log("Category context updated:", category);
-    console.log("Businesses loaded:", businesses.length, "IsLoading:", isLoading);
+    if (category) {
+      console.log("Category context updated:", category);
+    }
+    console.log("Businesses loaded:", businesses?.length || 0, "IsLoading:", isLoading);
   }, [category, businesses, isLoading]);
 
   const seoTitle = `${category.name} en Iztapalapa | IztapaMarket`;

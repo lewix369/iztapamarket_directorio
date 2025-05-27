@@ -40,18 +40,6 @@ function App() {
 				<Routes>
 					<Route path="/" element={<PageWrapper title="Directorio de Negocios en Iztapalapa" description="Encuentra y anuncia negocios locales en Iztapalapa. Taquerías, servicios, tiendas y más. ¡Impulsa tu visibilidad!" canonicalPath="/"><HomePage /></PageWrapper>} />
 					<Route 
-					  path="/categorias/:categorySlug" 
-					  element={
-					    <PageWrapper 
-					      title="Negocios por categoría en Iztapalapa" 
-					      description="Explora negocios locales clasificados por categoría. Encuentra servicios, alimentos, belleza, tecnología y más." 
-					    >
-					      <CategoryBusinessesPage />
-					    </PageWrapper>
-					  } 
-					/>
-					<Route path="/categorias/:slug" element={<RedirectOldSlugs />} />
-					<Route 
 					  path="/categorias"
 					  element={
 					    <PageWrapper
@@ -62,6 +50,17 @@ function App() {
 					      <CategoriesPage />
 					    </PageWrapper>
 					  }
+					/>
+					<Route 
+					  path="/categorias/:categorySlug" 
+					  element={
+					    <PageWrapper 
+					      title="Negocios por categoría en Iztapalapa" 
+					      description="Explora negocios locales clasificados por categoría. Encuentra servicios, alimentos, belleza, tecnología y más." 
+					    >
+					      <CategoryBusinessesPage />
+					    </PageWrapper>
+					  } 
 					/>
 					<Route path="/negocio/:id" element={<PageWrapper><BusinessDetailsPage /></PageWrapper>} />
 					<Route path="/registrarse" element={<PageWrapper title="Registra tu Negocio" description="Añade tu negocio al directorio IztapaMarket. Aumenta tu visibilidad y conecta con clientes locales." canonicalPath="/registrarse"><RegisterBusinessPage /></PageWrapper>} />

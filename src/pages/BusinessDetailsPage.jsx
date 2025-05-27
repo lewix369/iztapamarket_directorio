@@ -42,7 +42,11 @@ const BusinessDetailsPage = () => {
         return;
       }
 
-      const categoryDetails = allCategories.find(c => c.dbName === rawBusinessData.categoria || c.slug === rawBusinessData.categoria || c.name === rawBusinessData.categoria);
+      const categoryDetails = allCategories.find(c => 
+        c.dbName?.toLowerCase().trim() === rawBusinessData.categoria?.toLowerCase().trim() ||
+        c.slug?.toLowerCase().trim() === rawBusinessData.categoria?.toLowerCase().trim() ||
+        c.name?.toLowerCase().trim() === rawBusinessData.categoria?.toLowerCase().trim()
+      );
       const formattedBusiness = formatBusinessData(rawBusinessData, categoryDetails?.name);
       
       const mapEmbedUrlWithKey = rawBusinessData.mapa_embed_url || (rawBusinessData.direccion ? `https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY_FALLBACK'}&q=${encodeURIComponent(rawBusinessData.direccion)}` : null);
@@ -55,7 +59,11 @@ const BusinessDetailsPage = () => {
       if (formattedBusiness.category) {
         const rawRelatedData = await fetchRelatedBusinesses(formattedBusiness.category, formattedBusiness.id, 3);
         const formattedRelated = rawRelatedData.map(b => {
-           const relCategoryDetails = allCategories.find(c => c.dbName === b.categoria || c.slug === b.categoria || c.name === b.categoria);
+           const relCategoryDetails = allCategories.find(c => 
+             c.dbName?.toLowerCase().trim() === b.categoria?.toLowerCase().trim() ||
+             c.slug?.toLowerCase().trim() === b.categoria?.toLowerCase().trim() ||
+             c.name?.toLowerCase().trim() === b.categoria?.toLowerCase().trim()
+           );
            return formatBusinessData(b, relCategoryDetails?.name);
         });
         setRelatedBusinesses(formattedRelated);

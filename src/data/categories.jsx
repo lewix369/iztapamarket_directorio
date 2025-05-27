@@ -4,79 +4,79 @@ export const categories = [
   {
     name: 'Alimentos y Bebidas',
     slug: 'alimentos-y-bebidas',
+    dbName: 'alimentos-y-bebidas',
     icon: Utensils,
-    description: "Restaurantes, fondas, antojos y más.",
-    dbName: 'alimentos'
+    description: "Restaurantes, fondas, antojos y más."
   },
   {
     name: 'Belleza y Cuidado Personal',
     slug: 'belleza-y-cuidado-personal',
+    dbName: 'belleza-y-cuidado-personal',
     icon: SprayCan,
-    description: "Estéticas, barberías, spas, uñas.",
-    dbName: 'belleza'
+    description: "Estéticas, barberías, spas, uñas."
   },
   {
     name: 'Servicios del Hogar',
     slug: 'servicios-del-hogar',
+    dbName: 'servicios-del-hogar',
     icon: Home,
-    description: "Plomería, electricidad, limpieza y más.",
-    dbName: 'servicios'
+    description: "Plomería, electricidad, limpieza y más."
   },
   {
     name: 'Moda y Tiendas',
     slug: 'moda-y-tiendas',
+    dbName: 'moda-y-tiendas',
     icon: Shirt,
-    description: "Ropa, accesorios, calzado y regalos.",
-    dbName: 'moda'
+    description: "Ropa, accesorios, calzado y regalos."
   },
   {
     name: 'Mascotas',
     slug: 'mascotas',
+    dbName: 'mascotas',
     icon: Dog,
-    description: "Veterinarias, tiendas de mascotas, estética canina.",
-    dbName: 'mascotas'
+    description: "Veterinarias, tiendas de mascotas, estética canina."
   },
   {
     name: 'Salud y Bienestar',
     slug: 'salud-y-bienestar',
+    dbName: 'salud-y-bienestar',
     icon: Stethoscope,
-    description: "Consultorios, farmacias, dentistas, terapeutas.",
-    dbName: 'salud'
+    description: "Consultorios, farmacias, dentistas, terapeutas."
   },
   {
     name: 'Educación',
     slug: 'educacion',
+    dbName: 'educacion',
     icon: GraduationCap,
-    description: "Clases, talleres, regularización, escuelas.",
-    dbName: 'educacion'
+    description: "Clases, talleres, regularización, escuelas."
   },
   {
     name: 'Otros',
     slug: 'otros',
+    dbName: 'otros',
     icon: Package,
-    description: "Otros servicios y productos diversos.",
-    dbName: 'otros'
+    description: "Otros servicios y productos diversos."
   },
   {
     name: 'Tiendas y Abarrotes',
     slug: 'tiendas-y-abarrotes',
+    dbName: 'tiendas-y-abarrotes',
     icon: Package,
-    description: "Tiendas de abarrotes, productos básicos y misceláneas.",
-    dbName: 'tiendas'
+    description: "Tiendas de abarrotes, productos básicos y misceláneas."
   },
   {
     name: 'Autos y Talleres',
     slug: 'autos-y-talleres',
+    dbName: 'autos-y-talleres',
     icon: Package,
-    description: "Mecánica, refacciones y talleres automotrices.",
-    dbName: 'autos'
+    description: "Mecánica, refacciones y talleres automotrices."
   },
   {
     name: 'Tecnología',
     slug: 'tecnologia',
+    dbName: 'tecnologia',
     icon: Package,
-    description: "Reparación de celulares, gadgets y venta de accesorios.",
-    dbName: 'tecnologia'
+    description: "Reparación de celulares, gadgets y venta de accesorios."
   }
 ];
 

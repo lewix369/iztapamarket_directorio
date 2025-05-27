@@ -127,7 +127,7 @@ const HomePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index + 0.4, duration: 0.4 }}
             >
-              <Link to={`/categorias/${category.dbName}`}>
+              <Link to={`/categorias/${category.slug}`}>
                 <CategoryCard category={category} />
               </Link>
             </motion.div>
