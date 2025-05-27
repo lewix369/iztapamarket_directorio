@@ -36,7 +36,7 @@ const CategoryBusinessesPage = () => {
 
   console.log("📦 Slug recibido desde URL:", categorySlug);
   console.log("🔁 Slug enviado al hook:", category.dbName);
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.dbName);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {

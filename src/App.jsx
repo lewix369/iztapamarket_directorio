@@ -38,7 +38,6 @@ function App() {
 		<Router>
 			<Layout>
 				<Routes>
-					<Route path="/categorias/:slug" element={<RedirectOldSlugs />} />
 					<Route path="/" element={<PageWrapper title="Directorio de Negocios en Iztapalapa" description="Encuentra y anuncia negocios locales en Iztapalapa. Taquerías, servicios, tiendas y más. ¡Impulsa tu visibilidad!" canonicalPath="/"><HomePage /></PageWrapper>} />
 					<Route 
 					  path="/categorias/:categorySlug" 
@@ -51,6 +50,7 @@ function App() {
 					    </PageWrapper>
 					  } 
 					/>
+					<Route path="/categorias/:slug" element={<RedirectOldSlugs />} />
 					<Route 
 					  path="/categorias"
 					  element={
