@@ -31,10 +31,12 @@ export const useBusinessesLoader = (category) => {
           valor: slug
         });
 
+        const normalizedSlug = slug.replace(/\s+/g, '-').toLowerCase();
+
         const { data, error } = await supabase
           .from('negocios')
           .select('id, nombre, descripcion, categoria, slug_categoria, direccion, whatsapp, imagen_url, logo_url, web, hours, gallery_images, menu, telefono, plan_type, video_embed_url, mapa_embed_url, created_at, instagram, facebook, services')
-          .eq('slug_categoria', slug);
+          .eq('slug_categoria', normalizedSlug);
 
         console.log("📊 Resultado crudo de Supabase:", data);
 
@@ -55,7 +57,7 @@ export const useBusinessesLoader = (category) => {
     };
 
     fetchBusinesses();
-  }, [typeof category === 'string' ? category : category?.slug]);
+  }, [category]);
 
   return { businesses, isLoading, error };
 };
