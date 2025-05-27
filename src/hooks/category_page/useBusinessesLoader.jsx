@@ -9,41 +9,40 @@ export const useBusinessesLoader = (category) => {
   useEffect(() => {
     if (!category) return;
 
-    const slug =
-      typeof category === 'string'
-        ? category.trim().toLowerCase()
-        : (category.slug || '').trim().toLowerCase();
+    const slug = typeof category === 'string'
+      ? category
+      : category?.slug || '';
 
-    if (!slug) return;
+    const cleanedSlug = slug.trim().toLowerCase().replace(/\s+/g, '-');
+
+    if (!cleanedSlug) return;
 
     const fetchBusinesses = async () => {
       setIsLoading(true);
       setError(null);
 
       console.log("📥 Hook recibido con categoría:", category);
-      console.log("🔍 Slug limpio enviado al hook:", slug);
+      console.log("🔍 Slug limpio enviado al hook:", cleanedSlug);
 
       try {
         console.log("🧾 Consulta enviada a Supabase:");
         console.log({
           tabla: 'negocios',
           filtro: 'slug_categoria',
-          valor: slug
+          valor: cleanedSlug
         });
-
-        const normalizedSlug = slug.replace(/\s+/g, '-').toLowerCase();
 
         const { data, error } = await supabase
           .from('negocios')
           .select('id, nombre, descripcion, categoria, slug_categoria, direccion, whatsapp, imagen_url, logo_url, web, hours, gallery_images, menu, telefono, plan_type, video_embed_url, mapa_embed_url, created_at, instagram, facebook, services')
-          .eq('slug_categoria', normalizedSlug);
+          .eq('slug_categoria', cleanedSlug);
 
         console.log("📊 Resultado crudo de Supabase:", data);
 
         if (error) throw error;
 
         if (!data || data.length === 0) {
-          console.warn("⚠️ No se encontraron datos en Supabase. Verifica si el slug coincide exactamente con lo almacenado:", slug);
+          console.warn("⚠️ No se encontraron datos en Supabase. Verifica si el slug coincide exactamente con lo almacenado:", cleanedSlug);
         }
 
         setBusinesses(Array.isArray(data) ? data : []);
