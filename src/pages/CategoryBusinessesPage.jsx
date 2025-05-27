@@ -34,8 +34,8 @@ const CategoryBusinessesPage = () => {
     return <Navigate to="/categorias" replace />;
   }
 
-  console.log("🧠 Slug recibido desde el componente:", category.dbName);
-  console.log("🧩 Slug final enviado al hook desde la página:", category.dbName);
+  console.log("📦 Slug recibido desde URL:", categorySlug);
+  console.log("🔁 Slug enviado al hook:", category.dbName);
   const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   

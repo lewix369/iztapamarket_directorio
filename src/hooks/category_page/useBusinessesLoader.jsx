@@ -55,7 +55,7 @@ export const useBusinessesLoader = (category) => {
     };
 
     fetchBusinesses();
-  }, [category]);
+  }, [typeof category === 'string' ? category : category?.slug]);
 
   return { businesses, isLoading, error };
 };

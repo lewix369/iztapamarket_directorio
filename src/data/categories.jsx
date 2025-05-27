@@ -6,28 +6,28 @@ export const categories = [
     slug: 'alimentos-y-bebidas',
     icon: Utensils,
     description: "Restaurantes, fondas, antojos y más.",
-    dbName: 'alimentos-y-bebidas'
+    dbName: 'alimentos'
   },
   {
     name: 'Belleza y Cuidado Personal',
     slug: 'belleza-y-cuidado-personal',
     icon: SprayCan,
     description: "Estéticas, barberías, spas, uñas.",
-    dbName: 'belleza-y-cuidado-personal'
+    dbName: 'belleza'
   },
   {
     name: 'Servicios del Hogar',
     slug: 'servicios-del-hogar',
     icon: Home,
     description: "Plomería, electricidad, limpieza y más.",
-    dbName: 'servicios-del-hogar'
+    dbName: 'servicios'
   },
   {
     name: 'Moda y Tiendas',
     slug: 'moda-y-tiendas',
     icon: Shirt,
     description: "Ropa, accesorios, calzado y regalos.",
-    dbName: 'moda-y-tiendas'
+    dbName: 'moda'
   },
   {
     name: 'Mascotas',
@@ -41,7 +41,7 @@ export const categories = [
     slug: 'salud-y-bienestar',
     icon: Stethoscope,
     description: "Consultorios, farmacias, dentistas, terapeutas.",
-    dbName: 'salud-y-bienestar'
+    dbName: 'salud'
   },
   {
     name: 'Educación',
@@ -62,14 +62,14 @@ export const categories = [
     slug: 'tiendas-y-abarrotes',
     icon: Package,
     description: "Tiendas de abarrotes, productos básicos y misceláneas.",
-    dbName: 'tiendas-y-abarrotes'
+    dbName: 'tiendas'
   },
   {
     name: 'Autos y Talleres',
     slug: 'autos-y-talleres',
     icon: Package,
     description: "Mecánica, refacciones y talleres automotrices.",
-    dbName: 'autos-y-talleres'
+    dbName: 'autos'
   },
   {
     name: 'Tecnología',

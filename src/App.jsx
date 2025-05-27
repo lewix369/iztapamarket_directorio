@@ -17,6 +17,8 @@ import SitemapDisplayPage from '@/pages/SitemapDisplayPage.jsx';
 import { Toaster } from '@/components/ui/toaster';
 import SeoManager from '@/components/SeoManager.jsx';
 
+import RedirectOldSlugs from '@/components/RedirectOldSlugs';
+
 const PageWrapper = ({ children, title, description, canonicalPath }) => {
   const location = useLocation();
   const siteBaseUrl = "https://iztapamarket.com";
@@ -36,6 +38,7 @@ function App() {
 		<Router>
 			<Layout>
 				<Routes>
+					<Route path="/categorias/:slug" element={<RedirectOldSlugs />} />
 					<Route path="/" element={<PageWrapper title="Directorio de Negocios en Iztapalapa" description="Encuentra y anuncia negocios locales en Iztapalapa. Taquerías, servicios, tiendas y más. ¡Impulsa tu visibilidad!" canonicalPath="/"><HomePage /></PageWrapper>} />
 					<Route 
 					  path="/categorias/:categorySlug" 

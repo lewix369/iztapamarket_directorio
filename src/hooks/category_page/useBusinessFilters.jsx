@@ -1,4 +1,3 @@
-
 import { useMemo } from 'react';
 
 export const useBusinessFilters = (businesses, searchTerm, sortOrder) => {
