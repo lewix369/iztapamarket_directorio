@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -6,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { ArrowRight, Tag } from 'lucide-react';
 
 const CategoryCard = ({ category, isFullPage = false, index = 0 }) => {
+  console.log("📦 Renderizando tarjeta de categoría:", category);
   const IconComponent = category.icon || Tag;
 
   const cardVariants = {
@@ -52,7 +52,7 @@ const CategoryCard = ({ category, isFullPage = false, index = 0 }) => {
   if (isFullPage) {
     return (
       <motion.div variants={cardVariants} initial="hidden" animate="visible" whileHover="hover" className="h-full">
-        <Link to={`/categorias/${category.slug}`} className="block h-full">
+        <Link to={`/categorias/${category.slug.toLowerCase()}`} className="block h-full">
           <Card className="h-full flex flex-col justify-between items-center text-center cursor-pointer group bg-card hover:border-primary/50 transition-all duration-200 shadow-md hover:shadow-xl rounded-xl overflow-hidden border border-border/50">
             {content}
           </Card>
@@ -63,7 +63,7 @@ const CategoryCard = ({ category, isFullPage = false, index = 0 }) => {
 
   return (
     <motion.div variants={cardVariants} initial="hidden" animate="visible" whileHover="hover">
-      <Link to={`/categorias/${category.slug}`}>
+      <Link to={`/categorias/${category.slug.toLowerCase()}`}>
         <Card className="cursor-pointer group bg-card hover:border-primary/50 transition-all duration-200 shadow-md hover:shadow-lg rounded-xl overflow-hidden border border-border/50">
           {content}
         </Card>

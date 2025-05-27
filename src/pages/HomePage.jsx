@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -128,7 +127,9 @@ const HomePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index + 0.4, duration: 0.4 }}
             >
-              <CategoryCard category={category} />
+              <Link to={`/categorias/${category.dbName}`}>
+                <CategoryCard category={category} />
+              </Link>
             </motion.div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import CategoryCard from '@/components/CategoryCard.jsx';
 import { motion } from 'framer-motion';
 
 const CategoriesPage = () => {
+  console.log("🧠 Categorías recibidas en CategoriesPage:", categories);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
