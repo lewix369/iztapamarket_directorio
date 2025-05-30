@@ -30,7 +30,7 @@ export const categories = [
     description: "Ropa, accesorios, calzado y regalos."
   },
   {
-    name: 'Mascotas',
+    name: 'Mascotas y Tiendas',
     slug: 'mascotas-y-tiendas',
     dbName: 'mascotas-y-tiendas',
     icon: Dog,
