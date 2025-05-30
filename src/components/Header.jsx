@@ -33,6 +33,9 @@ const Header = () => {
           <Link to="/" className="flex items-center justify-center md:justify-start" aria-label="Página de inicio de IztapaMarket">
             <img  src={originalLogoUrl} alt="IztapaMarket Logo - Directorio de Negocios de Iztapalapa" className="h-10 sm:h-11 md:h-12" />
           </Link>
+          <div className="text-sm text-primary font-semibold mt-2 md:mt-0 md:ml-4">
+            Página de inicio de IztapaMarket
+          </div>
         </div>
         
         <nav className="hidden md:flex flex-1 justify-center items-center space-x-2 lg:space-x-4" aria-label="Navegación principal">

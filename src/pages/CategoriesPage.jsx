@@ -5,6 +5,7 @@ import CategoryCard from '@/components/ui/CategoryCard.jsx';
 import SeoManager from '@/components/SeoManager.jsx';
 
 const CategoriesPage = () => {
+  console.log("Categorías cargadas:", categories);
   return (
     <SeoManager
       title="Categorías de Negocios en Iztapalapa"

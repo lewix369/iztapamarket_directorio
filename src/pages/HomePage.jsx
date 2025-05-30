@@ -22,7 +22,9 @@ const HomePage = () => {
     alert(`Buscando: ${searchTerm}`);
   };
 
-  console.log("Categorías cargadas:", categories);
+  console.log("Categorías disponibles:", categories);
+  console.log("Negocios destacados:", localFeaturedBusinesses);
+  console.log("Testimonios:", testimonialsData);
   return (
     <motion.div 
       initial={{ opacity: 0 }}

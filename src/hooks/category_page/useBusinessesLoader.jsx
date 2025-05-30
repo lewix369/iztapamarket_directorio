@@ -1,19 +1,15 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
-export const useBusinessesLoader = (category) => {
+export const useBusinessesLoader = (slug_categoria) => {
   const [businesses, setBusinesses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!category) return;
+    if (!slug_categoria) return;
 
-    const slug = typeof category === 'string'
-      ? category
-      : category?.slug || '';
-
-    const cleanedSlug = slug.trim().toLowerCase().replace(/\s+/g, '-');
+    const cleanedSlug = slug_categoria?.toString().trim().toLowerCase().replace(/\s+/g, '-');
 
     if (!cleanedSlug) return;
 
@@ -21,7 +17,7 @@ export const useBusinessesLoader = (category) => {
       setIsLoading(true);
       setError(null);
 
-      console.log("📥 Hook recibido con categoría:", category);
+      console.log("📥 Hook recibido con categoría:", slug_categoria);
       console.log("🔍 Slug limpio enviado al hook:", cleanedSlug);
 
       try {
@@ -56,7 +52,7 @@ export const useBusinessesLoader = (category) => {
     };
 
     fetchBusinesses();
-  }, [category]);
+  }, [slug_categoria]);
 
   return { businesses, isLoading, error };
 };

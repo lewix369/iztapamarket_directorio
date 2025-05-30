@@ -31,8 +31,8 @@ export const categories = [
   },
   {
     name: 'Mascotas',
-    slug: 'mascotas',
-    dbName: 'mascotas',
+    slug: 'mascotas-y-tiendas',
+    dbName: 'mascotas-y-tiendas',
     icon: Dog,
     description: "Veterinarias, tiendas de mascotas, estética canina."
   },
@@ -45,15 +45,15 @@ export const categories = [
   },
   {
     name: 'Educación',
-    slug: 'educacion',
-    dbName: 'educacion',
+    slug: 'educacion-y-escuelas',
+    dbName: 'educacion-y-escuelas',
     icon: GraduationCap,
     description: "Clases, talleres, regularización, escuelas."
   },
   {
     name: 'Otros',
-    slug: 'otros',
-    dbName: 'otros',
+    slug: 'otros-y-servicios',
+    dbName: 'otros-y-servicios',
     icon: Package,
     description: "Otros servicios y productos diversos."
   },

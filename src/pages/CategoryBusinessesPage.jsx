@@ -37,9 +37,13 @@ const CategoryBusinessesPage = () => {
 
   console.log("📦 Slug recibido desde URL:", categorySlug);
   if (category) {
-    console.log("🔁 Slug enviado al hook:", category.dbName);
+    console.log("🔁 dbName enviado al hook:", category.dbName);
   }
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category.dbName);
+  // Usar el slug de la URL (categorySlug) como parámetro para el hook
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(categorySlug);
+  console.log("✅ slug para consulta:", categorySlug);
+  console.log("📊 Datos recibidos del hook:", businesses);
+  console.log("❌ Error desde el hook:", error);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
   
   useEffect(() => {
