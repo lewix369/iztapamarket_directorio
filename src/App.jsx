@@ -1,24 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from '@/components/Layout';
-import HomePage from '@/pages/HomePage';
-import PlanesPage from '@/pages/PlanesPage';
-import CategoriasPage from '@/pages/CategoriasPage';
-import CategoryBusinessesPage from '@/pages/CategoryBusinessesPage';
-import ContactoPage from '@/pages/ContactoPage';
-
-export default function App() {
+export default function CategoriasPage() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/planes" element={<PlanesPage />} />
-          <Route path="/categorias" element={<CategoriasPage />} />
-          <Route path="/categorias/:categorySlug" element={<CategoryBusinessesPage />} />
-          <Route path="/contacto" element={<ContactoPage />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <div>
+      <h1>Categorías</h1>
+      <p>Explora las categorías disponibles:</p>
+      <ul>
+        <li><a href="/categorias/alimentos-y-bebidas">Alimentos y Bebidas</a></li>
+        <li><a href="/categorias/mascotas-y-tiendas">Mascotas y Tiendas</a></li>
+      </ul>
+    </div>
   );
 }
