@@ -11,7 +11,9 @@ const CategoryBusinessesPage = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
 
   const categoriaEncontrada = categories.find(
-    (c) => c.slug?.toLowerCase().trim() === slug?.toLowerCase().trim()
+    (c) =>
+      `/categorias/${c.slug?.toLowerCase().trim()}` ===
+      `/categorias/${slug?.toLowerCase().trim()}`
   );
 
   useEffect(() => {
