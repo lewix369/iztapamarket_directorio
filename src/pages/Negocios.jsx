@@ -10,9 +10,25 @@ const Negocios = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
   const [busqueda, setBusqueda] = useState("");
 
-  const categoriaEncontrada = categories.find(
-    (c) => c.slug?.toLowerCase() === slug?.toLowerCase()
-  );
+  const categoriaEncontrada = categories.find((c) => slug && c.slug === slug);
+
+  useEffect(() => {
+    if (!categoriaEncontrada) {
+      const redirecciones = {
+        alimentos: "alimentos-y-bebidas",
+        mascotas: "mascotas-y-tiendas",
+        educacion: "educacion-y-escuelas",
+        belleza: "belleza-y-cuidado-personal",
+        autos: "autos-y-talleres",
+        servicios: "servicios-del-hogar",
+        tiendas: "moda-y-tiendas",
+      };
+
+      if (redirecciones[slug]) {
+        window.location.replace(`/categorias/${redirecciones[slug]}`);
+      }
+    }
+  }, [slug, categoriaEncontrada]);
 
   useEffect(() => {
     if (!categoriaEncontrada) {

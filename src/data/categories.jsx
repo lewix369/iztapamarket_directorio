@@ -27,7 +27,7 @@ export const categories = [
   },
   {
     name: "Servicios del Hogar",
-    slug: "servicios-y-del-hogar",
+    slug: "servicios-del-hogar",
     dbName: "Servicios del Hogar",
     icon: Home,
     description: "Plomería, electricidad, limpieza y más.",
