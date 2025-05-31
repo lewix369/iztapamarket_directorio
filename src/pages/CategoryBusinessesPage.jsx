@@ -16,10 +16,9 @@ const CategoryBusinessesPage = () => {
   console.log("🔍 Slug capturado desde URL:", slug);
 
   if (!allCategories || allCategories.length === 0) return <Navigate to="/categorias" replace />;
-  if (!slug || !allCategories.some(cat => {
-    const formattedSlug = cat.slug.toLowerCase().replace(/\s+/g, '-');
-    return formattedSlug === slug.toLowerCase();
-  })) {
+  const validCategorySlugs = allCategories.map(cat => cat.slug.toLowerCase().replace(/\s+/g, '-'));
+  const sanitizedSlug = slug.toLowerCase().replace(/\s+/g, '-');
+  if (!sanitizedSlug || !validCategorySlugs.includes(sanitizedSlug)) {
     console.warn(`❌ Slug inválido: "${slug}". Redirigiendo a /categorias.`);
     return <Navigate to="/categorias" replace />;
   }
@@ -33,9 +32,9 @@ const CategoryBusinessesPage = () => {
 
   const category = useMemo(() => {
     return allCategories.find(cat =>
-      cat.slug.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase()
+      cat.slug.toLowerCase().replace(/\s+/g, '-') === sanitizedSlug
     );
-  }, [slug]);
+  }, [sanitizedSlug]);
 
   if (!category) {
     return <Navigate to="/categorias" replace />;
@@ -46,7 +45,7 @@ const CategoryBusinessesPage = () => {
     console.log("🔁 dbName enviado al hook:", category.dbName);
   }
   // Usar category.slug como filtro correcto para el hook
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || slug);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || sanitizedSlug);
   console.log("✅ slug para consulta:", slug);
   console.log("📊 Datos recibidos del hook:", businesses);
   console.log("❌ Error desde el hook:", error);
