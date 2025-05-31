@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabaseClient';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +13,28 @@ import { motion } from 'framer-motion';
 
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [negociosPorCategoria, setNegociosPorCategoria] = useState({});
+
+  useEffect(() => {
+    const fetchBusinesses = async () => {
+      const { data, error } = await supabase.from('negocios').select('*');
+      if (error) {
+        console.error("Error al cargar negocios:", error);
+        return;
+      }
+
+      const agrupados = {};
+      data.forEach((negocio) => {
+        const categoria = negocio.categoria;
+        if (!agrupados[categoria]) agrupados[categoria] = [];
+        agrupados[categoria].push(negocio);
+      });
+
+      setNegociosPorCategoria(agrupados);
+    };
+
+    fetchBusinesses();
+  }, []);
   
   const iztapaMarketHeroLogoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/726a303c-0921-4d09-936a-1d5c7a669090/360461f31659ff0a75c4e5891d625b0a.png";
   const officialWhatsAppNumber = "525647547221";
@@ -129,8 +152,8 @@ const HomePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index + 0.4, duration: 0.4 }}
             >
-              <Link to={`/categorias/${category.slug}`}>
-                <CategoryCard category={category} />
+              <Link to={`/categorias/${category.slug.toLowerCase().replace(/\s+/g, '-')}`}>
+                <CategoryCard category={category} negocios={negociosPorCategoria[category.dbName] || []} />
               </Link>
             </motion.div>
           ))}

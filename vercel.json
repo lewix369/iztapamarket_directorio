@@ -5,6 +5,23 @@
       "destination": "/index.html"
     }
   ],
+  "redirects": [
+    {
+      "source": "/categorias/alimentos",
+      "destination": "/categorias/alimentos-y-bebidas",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/mascotas",
+      "destination": "/categorias/mascotas-y-tiendas",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/educacion",
+      "destination": "/categorias/educacion-y-escuelas",
+      "permanent": true
+    }
+  ],
   "cleanUrls": true,
   "trailingSlash": false
 }

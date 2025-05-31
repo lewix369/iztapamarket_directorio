@@ -30,6 +30,15 @@ const BusinessCard = ({ business, className = '' }) => {
     videoEmbedUrl,
     categoryDisplay 
   } = business;
+
+  // Parse menuItems as array, even if it comes as a string
+  let parsedMenuItems = [];
+  try {
+    parsedMenuItems = typeof menuItems === 'string' ? JSON.parse(menuItems) : menuItems;
+  } catch (error) {
+    console.warn(`⚠️ Error al parsear el menú de ${nombre}:`, error);
+    parsedMenuItems = [];
+  }
   
   const categoryDetails = allCategories.find(cat => cat.name === categoryDisplay || cat.dbName === categoryDisplay || cat.slug === categoryDisplay || cat.name === category || cat.dbName === category);
   const CategoryIconComponent = categoryDetails ? categoryDetails.icon : defaultCategoryIcon;
@@ -116,7 +125,7 @@ const BusinessCard = ({ business, className = '' }) => {
                 </Button>
               )}
 
-              {menuItems && menuItems.length > 0 && (
+              {parsedMenuItems && parsedMenuItems.length > 0 && (
                 <Button variant="outline" className="w-full border-orange-500 text-orange-600 hover:bg-orange-500/10 hover:text-orange-700 font-semibold shadow-sm transition-all duration-300 ease-in-out transform hover:scale-[1.02]" onClick={() => setIsMenuOpen(true)}>
                   <ShoppingCart className="mr-2 h-4 w-4" /> Ver Menú
                 </Button>
@@ -126,7 +135,7 @@ const BusinessCard = ({ business, className = '' }) => {
         </Card>
       </motion.div>
 
-      {menuItems && menuItems.length > 0 && (
+      {parsedMenuItems && parsedMenuItems.length > 0 && (
         <Dialog open={isMenuOpen} onOpenChange={setIsMenuOpen}>
           <DialogContent className="sm:max-w-[425px] bg-background text-foreground rounded-lg shadow-xl border-border">
             <DialogHeader>
@@ -136,7 +145,7 @@ const BusinessCard = ({ business, className = '' }) => {
               </DialogDescription>
             </DialogHeader>
             <div className="max-h-[60vh] overflow-y-auto py-4 space-y-3 pr-2">
-              {menuItems.map((item, index) => (
+              {parsedMenuItems.map((item, index) => (
                 <div key={index} className="p-3 bg-muted/50 rounded-md border border-border/50 flex justify-between items-center">
                   <div>
                     <h4 className="font-semibold text-foreground">{item.name || 'Artículo sin nombre'}</h4>

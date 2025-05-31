@@ -9,7 +9,7 @@ export const useBusinessesLoader = (slug_categoria) => {
   useEffect(() => {
     if (!slug_categoria) return;
 
-    const cleanedSlug = slug_categoria?.toString().trim().toLowerCase().replace(/\s+/g, '-');
+    const cleanedSlug = slug_categoria?.toString().trim();
 
     if (!cleanedSlug) return;
 

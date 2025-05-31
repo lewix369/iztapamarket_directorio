@@ -15,7 +15,7 @@ const CategoryBusinessesPage = () => {
   const { categorySlug } = useParams();
 
   if (!allCategories || allCategories.length === 0) return <Navigate to="/categorias" replace />;
-  const validCategorySlugs = allCategories.map(cat => cat.slug);
+  const validCategorySlugs = allCategories.map(cat => cat.slug.toLowerCase().replace(/\s+/g, '-'));
   if (!categorySlug || !validCategorySlugs.includes(categorySlug)) {
     return <Navigate to="/categorias" replace />;
   }
@@ -28,7 +28,9 @@ const CategoryBusinessesPage = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const category = useMemo(() => {
-    return allCategories.find(cat => cat.slug === categorySlug);
+    return allCategories.find(cat => 
+      cat.slug.toLowerCase().replace(/\s+/g, '-') === categorySlug
+    );
   }, [categorySlug]);
 
   if (!category) {
@@ -39,8 +41,8 @@ const CategoryBusinessesPage = () => {
   if (category) {
     console.log("🔁 dbName enviado al hook:", category.dbName);
   }
-  // Usar el slug de la URL (categorySlug) como parámetro para el hook
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(categorySlug);
+  // Usar category.slug como filtro correcto para el hook
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || categorySlug);
   console.log("✅ slug para consulta:", categorySlug);
   console.log("📊 Datos recibidos del hook:", businesses);
   console.log("❌ Error desde el hook:", error);
