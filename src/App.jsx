@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from '@/pages/HomePage.jsx';
 import CategoriasPage from '@/pages/CategoriasPage.jsx';
-import NegociosPorCategoria from '@/pages/Negocios.jsx';
+import NegociosPorCategoria from '@/pages/CategoryBusinessesPage.jsx';
 import BusinessDetailsPage from '@/pages/BusinessDetailsPage.jsx';
 import NotFound from '@/pages/NotFound.jsx';
 
