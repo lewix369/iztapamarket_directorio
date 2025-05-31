@@ -12,16 +12,17 @@ import { useBusinessesLoader } from '@/hooks/category_page/useBusinessesLoader.j
 import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx';
 
 const CategoryBusinessesPage = () => {
-  const { slug } = useParams();
+  const { slug: rawSlug } = useParams();
+  const slug = rawSlug?.toLowerCase().trim().replace(/\s+/g, '-');
   console.log("🔍 Slug capturado desde URL:", slug);
+  console.log("🧹 Slug sanitizado:", slug);
 
   console.log("🧩 Categorías cargadas desde categories.jsx:", allCategories);
-  const sanitizedSlug = slug?.toLowerCase().replace(/\s+/g, '-');
   const category = useMemo(() => {
     return allCategories.find(cat =>
-      cat.slug.toLowerCase().replace(/\s+/g, '-') === sanitizedSlug
+      cat.slug.toLowerCase().trim().replace(/\s+/g, '-') === slug
     );
-  }, [sanitizedSlug]);
+  }, [slug]);
 
   if (!allCategories || allCategories.length === 0 || !category) {
     console.warn(`❌ Slug inválido o categorías no cargadas: "${slug}". Redirigiendo a /categorias.`);
@@ -41,7 +42,7 @@ const CategoryBusinessesPage = () => {
     console.log("🔁 dbName enviado al hook:", category.dbName);
   }
   // Usar category.slug como filtro correcto para el hook
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || sanitizedSlug);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || slug);
   console.log("✅ slug para consulta:", slug);
   console.log("📊 Datos recibidos del hook:", businesses);
   console.log("❌ Error desde el hook:", error);
