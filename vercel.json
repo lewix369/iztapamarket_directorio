@@ -8,3 +8,26 @@
   "cleanUrls": true,
   "trailingSlash": false
 }
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "iztapamarket.com"
+        }
+      ],
+      "destination": "https://www.iztapamarket.com/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
