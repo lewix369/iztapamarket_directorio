@@ -3,11 +3,20 @@ import { useParams } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { categories } from '@/data/categories.jsx';
 
-const NegociosPorCategoria = () => {
+const Negocios = () => {
   const { slug } = useParams();
   const [negocios, setNegocios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categoriaNombre, setCategoriaNombre] = useState('');
+
+  if (!slug) {
+    return (
+      <div className="p-6">
+        <h1 className="text-2xl font-bold mb-4">Error: Slug de categoría inválido</h1>
+        <p className="text-gray-600">No se encontraron negocios en esta categoría.</p>
+      </div>
+    );
+  }
 
   useEffect(() => {
     const categoriaEncontrada = categories.find(
@@ -66,4 +75,4 @@ const NegociosPorCategoria = () => {
   );
 };
 
-export default NegociosPorCategoria;
+export default Negocios;
