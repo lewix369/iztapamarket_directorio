@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { categories } from "@/data/categories";
-import { useBusinessesLoader } from "@/hooks/useBusinessesLoader";
+import { useBusinessesLoader } from "@/hooks/category_page/useBusinessesLoader";
 import BusinessCard from "@/components/BusinessCard";
 
 const CategoryBusinessesPage = () => {
