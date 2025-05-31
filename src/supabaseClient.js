@@ -1,6 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+function CategoriesPage({ categories }) {
+  return (
+    <div>
+      {categories.map((category) => (
+        <Link to={`/categorias/${category.slug}`} key={category.slug}>
+          {category.name}
+        </Link>
+      ))}
+    </div>
+  );
+}
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export default CategoriesPage;

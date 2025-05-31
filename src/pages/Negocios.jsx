@@ -1,37 +1,55 @@
-import { useEffect, useState } from 'react'
-import { supabase } from '../supabaseClient'
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
+import { categories } from '@/data/categories.jsx';
 
-const Negocios = () => {
-  const [negocios, setNegocios] = useState([])
+const NegociosPorCategoria = () => {
+  const { slug } = useParams();
+  const [negocios, setNegocios] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [categoriaNombre, setCategoriaNombre] = useState('');
 
   useEffect(() => {
+    const categoriaEncontrada = categories.find(
+      (c) =>
+        c.slug?.toLowerCase() === slug?.toLowerCase() ||
+        c.dbName?.toLowerCase() === slug?.toLowerCase()
+    );
+
+    if (!categoriaEncontrada) {
+      setLoading(false);
+      setNegocios([]);
+      return;
+    }
+
+    setCategoriaNombre(categoriaEncontrada.name);
+
     const fetchNegocios = async () => {
       const { data, error } = await supabase
         .from('negocios')
         .select('*')
-        .order('nombre', { ascending: true })
+        .eq('categoria', categoriaEncontrada.dbName);
 
       if (error) {
-        console.error('Error al obtener negocios:', error)
-        setLoading(false);
+        console.error('Error al obtener negocios:', error);
+        setNegocios([]);
       } else {
-        setNegocios(data)
-        setLoading(false);
+        setNegocios(data);
       }
-    }
+      setLoading(false);
+    };
 
-    fetchNegocios()
-  }, [])
+    fetchNegocios();
+  }, [slug]);
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Directorio de Negocios</h1>
+      <h1 className="text-2xl font-bold mb-4">Negocios de {categoriaNombre}</h1>
 
       {loading ? (
         <p className="text-gray-600">Cargando negocios...</p>
       ) : negocios.length === 0 ? (
-        <p className="text-gray-600">No se encontraron negocios registrados.</p>
+        <p className="text-gray-600">No se encontraron negocios en esta categoría.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {negocios.map((n) => (
@@ -45,7 +63,7 @@ const Negocios = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Negocios
+export default NegociosPorCategoria;

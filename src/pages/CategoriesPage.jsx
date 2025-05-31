@@ -17,7 +17,7 @@ const CategoriesPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories && categories.length > 0 ? (
             categories.map((category) => (
-              <Link to={`/categorias/${(category.slug || category.dbName).toLowerCase()}`} key={category.slug || category.dbName}>
+              <Link to={`/categorias/${category.slug.toLowerCase()}`} key={category.slug}>
                 <CategoryCard category={category} />
               </Link>
             ))
