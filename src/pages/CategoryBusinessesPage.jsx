@@ -12,11 +12,15 @@ import { useBusinessesLoader } from '@/hooks/category_page/useBusinessesLoader.j
 import { useBusinessFilters } from '@/hooks/category_page/useBusinessFilters.jsx';
 
 const CategoryBusinessesPage = () => {
-  const { categorySlug } = useParams();
+  const { slug } = useParams();
+  console.log("🔍 Slug capturado desde URL:", slug);
 
   if (!allCategories || allCategories.length === 0) return <Navigate to="/categorias" replace />;
-  const validCategorySlugs = allCategories.map(cat => cat.slug.toLowerCase().replace(/\s+/g, '-'));
-  if (!categorySlug || !validCategorySlugs.includes(categorySlug)) {
+  if (!slug || !allCategories.some(cat => {
+    const formattedSlug = cat.slug.toLowerCase().replace(/\s+/g, '-');
+    return formattedSlug === slug.toLowerCase();
+  })) {
+    console.warn(`❌ Slug inválido: "${slug}". Redirigiendo a /categorias.`);
     return <Navigate to="/categorias" replace />;
   }
 
@@ -28,22 +32,22 @@ const CategoryBusinessesPage = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const category = useMemo(() => {
-    return allCategories.find(cat => 
-      cat.slug.toLowerCase().replace(/\s+/g, '-') === categorySlug
+    return allCategories.find(cat =>
+      cat.slug.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase()
     );
-  }, [categorySlug]);
+  }, [slug]);
 
   if (!category) {
     return <Navigate to="/categorias" replace />;
   }
 
-  console.log("📦 Slug recibido desde URL:", categorySlug);
+  console.log("📦 Slug recibido desde URL:", slug);
   if (category) {
     console.log("🔁 dbName enviado al hook:", category.dbName);
   }
   // Usar category.slug como filtro correcto para el hook
-  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || categorySlug);
-  console.log("✅ slug para consulta:", categorySlug);
+  const { businesses, isLoading, error, loadBusinesses } = useBusinessesLoader(category?.slug || slug);
+  console.log("✅ slug para consulta:", slug);
   console.log("📊 Datos recibidos del hook:", businesses);
   console.log("❌ Error desde el hook:", error);
   const filteredAndSortedBusinesses = useBusinessFilters(businesses, searchTerm, sortOrder);
