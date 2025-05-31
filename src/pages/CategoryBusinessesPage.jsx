@@ -11,9 +11,7 @@ const CategoryBusinessesPage = () => {
   const [categoriaNombre, setCategoriaNombre] = useState("");
 
   const categoriaEncontrada = categories.find(
-    (c) =>
-      `/categorias/${c.slug?.toLowerCase().trim()}` ===
-      `/categorias/${slug?.toLowerCase().trim()}`
+    (c) => c.slug?.toLowerCase().trim() === slug?.toLowerCase().trim()
   );
 
   useEffect(() => {
@@ -29,7 +27,7 @@ const CategoryBusinessesPage = () => {
       const { data, error } = await supabase
         .from("negocios")
         .select("*")
-        .eq("slug_categoria", categoriaEncontrada.slug);
+        .eq("categoria", categoriaEncontrada.dbName);
 
       if (error) {
         console.error("Error al obtener negocios:", error);
