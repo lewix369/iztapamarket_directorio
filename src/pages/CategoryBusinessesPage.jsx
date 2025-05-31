@@ -15,11 +15,16 @@ const CategoryBusinessesPage = () => {
   const { slug } = useParams();
   console.log("🔍 Slug capturado desde URL:", slug);
 
-  if (!allCategories || allCategories.length === 0) return <Navigate to="/categorias" replace />;
-  const validCategorySlugs = allCategories.map(cat => cat.slug.toLowerCase().replace(/\s+/g, '-'));
-  const sanitizedSlug = slug.toLowerCase().replace(/\s+/g, '-');
-  if (!sanitizedSlug || !validCategorySlugs.includes(sanitizedSlug)) {
-    console.warn(`❌ Slug inválido: "${slug}". Redirigiendo a /categorias.`);
+  console.log("🧩 Categorías cargadas desde categories.jsx:", allCategories);
+  const sanitizedSlug = slug?.toLowerCase().replace(/\s+/g, '-');
+  const category = useMemo(() => {
+    return allCategories.find(cat =>
+      cat.slug.toLowerCase().replace(/\s+/g, '-') === sanitizedSlug
+    );
+  }, [sanitizedSlug]);
+
+  if (!allCategories || allCategories.length === 0 || !category) {
+    console.warn(`❌ Slug inválido o categorías no cargadas: "${slug}". Redirigiendo a /categorias.`);
     return <Navigate to="/categorias" replace />;
   }
 
@@ -30,15 +35,6 @@ const CategoryBusinessesPage = () => {
   const [distanceFilter, setDistanceFilter] = useState(5); 
   const [showFilters, setShowFilters] = useState(false);
 
-  const category = useMemo(() => {
-    return allCategories.find(cat =>
-      cat.slug.toLowerCase().replace(/\s+/g, '-') === sanitizedSlug
-    );
-  }, [sanitizedSlug]);
-
-  if (!category) {
-    return <Navigate to="/categorias" replace />;
-  }
 
   console.log("📦 Slug recibido desde URL:", slug);
   if (category) {
