@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { categories } from '@/data/categories.jsx';
-import CategoryCard from '@/components/ui/CategoryCard.jsx';
+import CategoryCard from '@/components/CategoryCard';
 import SeoManager from '@/components/SeoManager.jsx';
 
 const CategoriesPage = () => {
