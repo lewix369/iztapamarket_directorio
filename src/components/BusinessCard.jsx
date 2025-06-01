@@ -53,13 +53,23 @@ const BusinessCard = ({ business, className = "" }) => {
     categoryDisplay,
   } = business;
 
-  const parsedMenuItems =
-    Array.isArray(menuItems) && menuItems.length > 0 ? menuItems : null;
+  let parsedMenuItems = [];
+  let menuLink = null;
 
-  const menuLink =
-    typeof menuItems === "string" && menuItems.startsWith("http")
-      ? menuItems
-      : null;
+  try {
+    if (typeof menuItems === "string") {
+      if (menuItems.startsWith("http")) {
+        menuLink = menuItems;
+      } else {
+        parsedMenuItems = JSON.parse(menuItems);
+      }
+    } else if (Array.isArray(menuItems)) {
+      parsedMenuItems = menuItems;
+    }
+  } catch (error) {
+    console.warn(`⚠️ Error al parsear el menú para ${nombre}:`, error);
+    parsedMenuItems = [];
+  }
 
   const categoryDetails = allCategories.find(
     (cat) =>
@@ -125,10 +135,7 @@ const BusinessCard = ({ business, className = "" }) => {
           </div>
 
           <CardContent className="p-5 flex flex-col flex-grow">
-            <h3
-              className="text-xl lg:text-2xl font-bold text-primary mb-2 truncate"
-              title={nombre}
-            >
+            <h3 className="text-xl lg:text-2xl font-bold text-primary mb-2 truncate" title={nombre}>
               <Link to={`/negocios/${id}`} className="hover:underline">
                 {nombre}
               </Link>
@@ -152,8 +159,7 @@ const BusinessCard = ({ business, className = "" }) => {
             )}
 
             <p className="text-sm text-foreground/80 mb-4 line-clamp-3 flex-grow">
-              {description ||
-                "Este negocio aún no ha agregado una descripción."}
+              {description || "Este negocio aún no ha agregado una descripción."}
             </p>
 
             <div className="mt-auto space-y-2.5">
@@ -200,11 +206,7 @@ const BusinessCard = ({ business, className = "" }) => {
 
               {showVideoLink && (
                 <Button asChild variant="outline" className="w-full border-red-500 text-red-600">
-                  <a
-                    href={videoEmbedUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={videoEmbedUrl} target="_blank" rel="noopener noreferrer">
                     <Youtube className="mr-2 h-4 w-4" /> Ver Video
                   </a>
                 </Button>

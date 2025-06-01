@@ -20,6 +20,46 @@
       "source": "/categorias/educacion",
       "destination": "/categorias/educacion-y-escuelas",
       "permanent": true
+    },
+    {
+      "source": "/categorias/belleza",
+      "destination": "/categorias/belleza-y-cuidado-personal",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/servicios",
+      "destination": "/categorias/servicios-del-hogar",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/moda",
+      "destination": "/categorias/moda-y-tiendas",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/salud",
+      "destination": "/categorias/salud-y-bienestar",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/otros",
+      "destination": "/categorias/otros-negocios",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/abarrotes",
+      "destination": "/categorias/tiendas-y-abarrotes",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/autos",
+      "destination": "/categorias/autos-y-talleres",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/tecnologia",
+      "destination": "/categorias/tecnologia-y-tiendas",
+      "permanent": true
     }
   ],
   "cleanUrls": true,
