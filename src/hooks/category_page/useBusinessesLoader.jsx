@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { categories } from "@/data/categories.jsx"; // Asegúrate de importar correctamente
 
 export const useBusinessesLoader = (slug_categoria) => {
   const [businesses, setBusinesses] = useState([]);
@@ -15,67 +16,38 @@ export const useBusinessesLoader = (slug_categoria) => {
     }
 
     const cleanedSlug = slug_categoria?.toString().trim();
-
     if (!cleanedSlug) return;
 
-    const slugMap = {
-      alimentos: "alimentos-y-bebidas",
-      mascotas: "mascotas-y-tiendas",
-      educacion: "educacion-y-escuelas",
-      belleza: "belleza-y-cuidado-personal",
-      hogar: "servicios-del-hogar",
-      moda: "moda-y-tiendas",
-      salud: "salud-y-bienestar",
-      tecnologia: "tecnologia-y-tiendas",
-      transporte: "transporte-y-logistica",
-      entretenimiento: "entretenimiento-y-tiempo-libre",
-    };
+    const matchedCategory = categories.find((cat) => cat.slug === cleanedSlug);
 
-    const realSlug = slugMap[cleanedSlug] || cleanedSlug;
+    if (!matchedCategory) {
+      console.warn("🚫 Slug de categoría inválido:", cleanedSlug);
+      setBusinesses([]);
+      setIsLoading(false);
+      return;
+    }
+
+    const dbCategoryName = matchedCategory.dbName;
 
     const fetchBusinesses = async () => {
       setIsLoading(true);
       setError(null);
 
-      console.log("📥 Hook recibido con categoría:", slug_categoria);
-      console.log("🔍 Slug limpio enviado al hook:", cleanedSlug);
-
       try {
-        console.log("🧾 Consulta enviada a Supabase:");
-        console.log({
-          tabla: "negocios",
-          filtro: "slug_categoria",
-          valor: realSlug,
-        });
-
-        console.log(
-          "🧪 Buscando con slug_categoria EXACTAMENTE:",
-          `'${realSlug}'`
-        );
+        console.log("🔎 Buscando negocios con categoría:", dbCategoryName);
 
         const { data, error } = await supabase
           .from("negocios")
           .select(
             "id, nombre, descripcion, categoria, slug_categoria, direccion, whatsapp, imagen_url, logo_url, web, hours, gallery_images, menu, telefono, plan_type, video_embed_url, mapa_embed_url, created_at, instagram, facebook, services"
           )
-          .eq("slug_categoria", realSlug);
-
-        console.log("🧾 Respuesta exacta Supabase:", data);
-
-        console.log("📊 Resultado crudo de Supabase:", data);
+          .eq("categoria", dbCategoryName); // Buscamos por el nombre real de la categoría
 
         if (error) throw error;
 
-        if (!data || data.length === 0) {
-          console.warn(
-            "⚠️ No se encontraron datos en Supabase. Verifica si el slug coincide exactamente con lo almacenado:",
-            realSlug
-          );
-        }
-
         setBusinesses(Array.isArray(data) ? data : []);
       } catch (err) {
-        console.error("❌ Error fetching businesses:", err);
+        console.error("❌ Error al obtener negocios:", err);
         setError(err.message);
         setBusinesses([]);
       } finally {

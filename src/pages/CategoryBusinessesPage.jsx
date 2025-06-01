@@ -6,9 +6,19 @@ import BusinessCard from "@/components/BusinessCard";
 
 const CategoryBusinessesPage = () => {
   const { slug } = useParams();
-  const category = categories.find((cat) => cat.slug === slug);
 
-  const { businesses, isLoading, error } = useBusinessesLoader(slug);
+  if (!slug) {
+    return (
+      <div className="p-6 text-center">
+        <h1 className="text-2xl font-bold text-red-600">
+          No se especificó ninguna categoría
+        </h1>
+        <p className="mt-2">Accede desde una categoría válida, por favor.</p>
+      </div>
+    );
+  }
+
+  const category = categories.find((cat) => cat.slug === slug);
 
   if (!category) {
     return (
@@ -23,6 +33,8 @@ const CategoryBusinessesPage = () => {
     );
   }
 
+  const { businesses, isLoading, error } = useBusinessesLoader(slug);
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">{category.name}</h1>
@@ -32,7 +44,7 @@ const CategoryBusinessesPage = () => {
         <p className="text-center">Cargando negocios...</p>
       ) : error ? (
         <p className="text-center text-red-500">
-          Error al cargar negocios: {error.message}
+          Error al cargar negocios: {error}
         </p>
       ) : businesses.length === 0 ? (
         <p className="text-center">
