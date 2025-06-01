@@ -5,63 +5,6 @@
       "destination": "/index.html"
     }
   ],
-  "redirects": [
-    {
-      "source": "/categorias/alimentos",
-      "destination": "/categorias/alimentos-y-bebidas",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/mascotas",
-      "destination": "/categorias/mascotas-y-tiendas",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/educacion",
-      "destination": "/categorias/educacion-y-escuelas",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/servicios",
-      "destination": "/categorias/servicios-del-hogar",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/moda",
-      "destination": "/categorias/moda-y-tiendas",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/veterinaria",
-      "destination": "/categorias/veterinaria-y-tienda-para-mascotas",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/abarrotes",
-      "destination": "/categorias/tiendas-y-abarrotes",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/otros",
-      "destination": "/categorias/otros-servicios",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/tecnologia",
-      "destination": "/categorias/tecnologia-y-tiendas",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/cuidado",
-      "destination": "/categorias/cuidado-personal",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/autos",
-      "destination": "/categorias/autos-y-talleres",
-      "permanent": true
-    }
-  ],
   "cleanUrls": true,
   "trailingSlash": false
 }

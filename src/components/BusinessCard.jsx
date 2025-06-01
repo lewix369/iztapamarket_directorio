@@ -50,7 +50,7 @@ const BusinessCard = ({ business, className = "" }) => {
     menuItems,
     website,
     videoEmbedUrl,
-    categoryDisplay,
+    slug_categoria,
   } = business;
 
   let parsedMenuItems = [];
@@ -73,21 +73,20 @@ const BusinessCard = ({ business, className = "" }) => {
 
   const categoryDetails = allCategories.find(
     (cat) =>
-      cat.name === categoryDisplay ||
-      cat.dbName === categoryDisplay ||
-      cat.slug === categoryDisplay ||
-      cat.name === category ||
-      cat.dbName === category
+      cat.slug === business.slug_categoria ||
+      cat.dbName === business.slug_categoria
   );
   const CategoryIconComponent = categoryDetails
     ? categoryDetails.icon
     : defaultCategoryIcon;
 
+  const categoryName = categoryDetails?.name || business.slug_categoria;
+
   const finalImageUrl =
     images?.[0] ||
     logoUrl ||
     `https://source.unsplash.com/random/600x400/?business,${encodeURIComponent(
-      categoryDisplay || "abstract"
+      categoryName || "abstract"
     )}&cachebust=${id}`;
 
   const isValidYoutubeLink = (url) => {
@@ -126,16 +125,19 @@ const BusinessCard = ({ business, className = "" }) => {
                 src={finalImageUrl}
               />
             </Link>
-            {categoryDisplay && CategoryIconComponent && (
+            {CategoryIconComponent && (
               <div className="absolute top-3 right-3 bg-primary/80 backdrop-blur-sm text-primary-foreground px-3 py-1.5 rounded-full text-xs font-semibold flex items-center shadow-md">
                 <CategoryIconComponent className="mr-1.5 h-4 w-4" />{" "}
-                {categoryDisplay}
+                {categoryName}
               </div>
             )}
           </div>
 
           <CardContent className="p-5 flex flex-col flex-grow">
-            <h3 className="text-xl lg:text-2xl font-bold text-primary mb-2 truncate" title={nombre}>
+            <h3
+              className="text-xl lg:text-2xl font-bold text-primary mb-2 truncate"
+              title={nombre}
+            >
               <Link to={`/negocios/${id}`} className="hover:underline">
                 {nombre}
               </Link>
@@ -159,7 +161,8 @@ const BusinessCard = ({ business, className = "" }) => {
             )}
 
             <p className="text-sm text-foreground/80 mb-4 line-clamp-3 flex-grow">
-              {description || "Este negocio aún no ha agregado una descripción."}
+              {description ||
+                "Este negocio aún no ha agregado una descripción."}
             </p>
 
             <div className="mt-auto space-y-2.5">
@@ -170,7 +173,11 @@ const BusinessCard = ({ business, className = "" }) => {
               </Button>
 
               {whatsapp && (
-                <Button asChild variant="outline" className="w-full border-green-500 text-green-600">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full border-green-500 text-green-600"
+                >
                   <a
                     href={`https://wa.me/${whatsapp.replace(
                       /\D/g,
@@ -181,13 +188,18 @@ const BusinessCard = ({ business, className = "" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <MessageSquare className="mr-2 h-4 w-4" /> Pedir por WhatsApp
+                    <MessageSquare className="mr-2 h-4 w-4" /> Pedir por
+                    WhatsApp
                   </a>
                 </Button>
               )}
 
               {menuLink && (
-                <Button asChild variant="outline" className="w-full border-orange-500 text-orange-600">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full border-orange-500 text-orange-600"
+                >
                   <a href={menuLink} target="_blank" rel="noopener noreferrer">
                     <ImageIcon className="mr-2 h-4 w-4" /> Ver Menú
                   </a>
@@ -205,8 +217,16 @@ const BusinessCard = ({ business, className = "" }) => {
               )}
 
               {showVideoLink && (
-                <Button asChild variant="outline" className="w-full border-red-500 text-red-600">
-                  <a href={videoEmbedUrl} target="_blank" rel="noopener noreferrer">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full border-red-500 text-red-600"
+                >
+                  <a
+                    href={videoEmbedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Youtube className="mr-2 h-4 w-4" /> Ver Video
                   </a>
                 </Button>

@@ -18,7 +18,9 @@ const CategoryBusinessesPage = () => {
     );
   }
 
-  const category = categories.find((cat) => cat.slug === slug);
+  const category = categories.find(
+    (cat) => cat.slug.toLowerCase() === slug.toLowerCase()
+  );
 
   if (!category) {
     return (
