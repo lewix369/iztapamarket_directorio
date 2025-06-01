@@ -17,6 +17,27 @@ export const useBusinessesLoader = (slug_categoria) => {
     const cleanedSlug = slug_categoria?.toString().trim().toLowerCase();
     if (!cleanedSlug) return;
 
+    const validSlugs = [
+      "alimentos-y-bebidas",
+      "belleza-y-cuidado-personal",
+      "servicios-del-hogar",
+      "moda-y-tiendas",
+      "mascotas-y-tiendas",
+      "salud-y-bienestar",
+      "educacion-y-escuelas",
+      "otros-negocios",
+      "tiendas-y-abarrotes",
+      "autos-y-talleres",
+      "tecnologia-y-tiendas",
+    ];
+    if (!validSlugs.includes(cleanedSlug)) {
+      console.warn("⚠️ Slug inválido:", cleanedSlug);
+      setError("Slug de categoría inválido");
+      setBusinesses([]);
+      setIsLoading(false);
+      return;
+    }
+
     const fetchBusinesses = async () => {
       setIsLoading(true);
       setError(null);
