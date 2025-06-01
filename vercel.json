@@ -22,11 +22,6 @@
       "permanent": true
     },
     {
-      "source": "/categorias/belleza",
-      "destination": "/categorias/belleza-y-cuidado-personal",
-      "permanent": true
-    },
-    {
       "source": "/categorias/servicios",
       "destination": "/categorias/servicios-del-hogar",
       "permanent": true
@@ -37,13 +32,8 @@
       "permanent": true
     },
     {
-      "source": "/categorias/salud",
-      "destination": "/categorias/salud-y-bienestar",
-      "permanent": true
-    },
-    {
-      "source": "/categorias/otros",
-      "destination": "/categorias/otros-negocios",
+      "source": "/categorias/veterinaria",
+      "destination": "/categorias/veterinaria-y-tienda-para-mascotas",
       "permanent": true
     },
     {
@@ -52,13 +42,23 @@
       "permanent": true
     },
     {
-      "source": "/categorias/autos",
-      "destination": "/categorias/autos-y-talleres",
+      "source": "/categorias/otros",
+      "destination": "/categorias/otros-servicios",
       "permanent": true
     },
     {
       "source": "/categorias/tecnologia",
       "destination": "/categorias/tecnologia-y-tiendas",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/cuidado",
+      "destination": "/categorias/cuidado-personal",
+      "permanent": true
+    },
+    {
+      "source": "/categorias/autos",
+      "destination": "/categorias/autos-y-talleres",
       "permanent": true
     }
   ],
