@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { categories } from "@/data/categories.jsx"; // Asegúrate de importar correctamente
+import { categories } from "@/data/categories.jsx";
 
 export const useBusinessesLoader = (slug_categoria) => {
   const [businesses, setBusinesses] = useState([]);
@@ -27,21 +27,22 @@ export const useBusinessesLoader = (slug_categoria) => {
       return;
     }
 
-    const dbCategoryName = matchedCategory.dbName;
-
     const fetchBusinesses = async () => {
       setIsLoading(true);
       setError(null);
 
       try {
-        console.log("🔎 Buscando negocios con categoría:", dbCategoryName);
+        console.log(
+          "🔎 Buscando negocios con slug_categoria:",
+          matchedCategory.slug
+        );
 
         const { data, error } = await supabase
           .from("negocios")
           .select(
             "id, nombre, descripcion, categoria, slug_categoria, direccion, whatsapp, imagen_url, logo_url, web, hours, gallery_images, menu, telefono, plan_type, video_embed_url, mapa_embed_url, created_at, instagram, facebook, services"
           )
-          .eq("categoria", dbCategoryName); // Buscamos por el nombre real de la categoría
+          .eq("slug_categoria", matchedCategory.slug);
 
         if (error) throw error;
 
