@@ -84,7 +84,7 @@ export const categories = [
   {
     name: "Tecnología y Tiendas",
     slug: "tecnologia-y-tiendas",
-    dbName: "tecnologia-y-tiendas", // 🔧 corregido aquí
+    dbName: "tecnologia-y-tiendas",
     icon: Package,
     description: "Reparación de celulares, gadgets y venta de accesorios.",
   },
