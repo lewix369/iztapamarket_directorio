@@ -13,7 +13,7 @@ import {
 
 export const categories = [
   {
-    name: "Alimentos y Bebidas",
+    name: "Test y Bebidas",
     slug: "alimentos-y-bebidas",
     dbName: "alimentos-y-bebidas",
     icon: Utensils,
