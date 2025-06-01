@@ -53,15 +53,13 @@ const BusinessCard = ({ business, className = "" }) => {
     categoryDisplay,
   } = business;
 
-  // Parse menuItems as array, even if it comes as a string
-  let parsedMenuItems = [];
-  try {
-    parsedMenuItems =
-      typeof menuItems === "string" ? JSON.parse(menuItems) : menuItems;
-  } catch (error) {
-    console.warn(`⚠️ Error al parsear el menú de ${nombre}:`, error);
-    parsedMenuItems = [];
-  }
+  const parsedMenuItems =
+    Array.isArray(menuItems) && menuItems.length > 0 ? menuItems : null;
+
+  const menuLink =
+    typeof menuItems === "string" && menuItems.startsWith("http")
+      ? menuItems
+      : null;
 
   const categoryDetails = allCategories.find(
     (cat) =>
@@ -113,9 +111,9 @@ const BusinessCard = ({ business, className = "" }) => {
               aria-label={`Ver detalles de ${nombre}`}
             >
               <img
-                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 alt={`Imagen de ${nombre}`}
-                src="https://images.unsplash.com/photo-1556491251-781a951fbc79"
+                src={finalImageUrl}
               />
             </Link>
             {categoryDisplay && CategoryIconComponent && (
@@ -159,25 +157,14 @@ const BusinessCard = ({ business, className = "" }) => {
             </p>
 
             <div className="mt-auto space-y-2.5">
-              <Button
-                asChild
-                variant="default"
-                className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
-              >
-                <Link
-                  to={`/negocios/${id}`}
-                  aria-label={`Conocer más sobre ${nombre}`}
-                >
+              <Button asChild variant="default" className="w-full">
+                <Link to={`/negocios/${id}`}>
                   Conocer Más <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
 
               {whatsapp && (
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full border-green-500 text-green-600 hover:bg-green-500/10 hover:text-green-700 font-semibold shadow-sm transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
-                >
+                <Button asChild variant="outline" className="w-full border-green-500 text-green-600">
                   <a
                     href={`https://wa.me/${whatsapp.replace(
                       /\D/g,
@@ -187,27 +174,16 @@ const BusinessCard = ({ business, className = "" }) => {
                     )}%20en%20IztapaMarket%20y%20quisiera%20más%20información.`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Pedir por WhatsApp a ${nombre}`}
                   >
-                    <MessageSquare className="mr-2 h-4 w-4" /> Pedir por
-                    WhatsApp
+                    <MessageSquare className="mr-2 h-4 w-4" /> Pedir por WhatsApp
                   </a>
                 </Button>
               )}
 
-              {showVideoLink && (
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full border-red-500 text-red-600 hover:bg-red-500/10 hover:text-red-700 font-semibold shadow-sm transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
-                >
-                  <a
-                    href={videoEmbedUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ver video de ${nombre} en YouTube`}
-                  >
-                    <Youtube className="mr-2 h-4 w-4" /> Ver Video
+              {menuLink && (
+                <Button asChild variant="outline" className="w-full border-orange-500 text-orange-600">
+                  <a href={menuLink} target="_blank" rel="noopener noreferrer">
+                    <ImageIcon className="mr-2 h-4 w-4" /> Ver Menú
                   </a>
                 </Button>
               )}
@@ -215,10 +191,22 @@ const BusinessCard = ({ business, className = "" }) => {
               {parsedMenuItems && parsedMenuItems.length > 0 && (
                 <Button
                   variant="outline"
-                  className="w-full border-orange-500 text-orange-600 hover:bg-orange-500/10 hover:text-orange-700 font-semibold shadow-sm transition-all duration-300 ease-in-out transform hover:scale-[1.02]"
+                  className="w-full border-orange-500 text-orange-600"
                   onClick={() => setIsMenuOpen(true)}
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" /> Ver Menú
+                </Button>
+              )}
+
+              {showVideoLink && (
+                <Button asChild variant="outline" className="w-full border-red-500 text-red-600">
+                  <a
+                    href={videoEmbedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Youtube className="mr-2 h-4 w-4" /> Ver Video
+                  </a>
                 </Button>
               )}
             </div>
@@ -228,26 +216,21 @@ const BusinessCard = ({ business, className = "" }) => {
 
       {parsedMenuItems && parsedMenuItems.length > 0 && (
         <Dialog open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-          <DialogContent className="sm:max-w-[425px] bg-background text-foreground rounded-lg shadow-xl border-border">
+          <DialogContent>
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-primary">
-                Menú de {nombre}
-              </DialogTitle>
+              <DialogTitle>Menú de {nombre}</DialogTitle>
               <DialogDescription>
-                Descubre los deliciosos platillos que {nombre} tiene para
-                ofrecer.
+                Descubre los platillos que {nombre} ofrece.
               </DialogDescription>
             </DialogHeader>
             <div className="max-h-[60vh] overflow-y-auto py-4 space-y-3 pr-2">
               {parsedMenuItems.map((item, index) => (
                 <div
                   key={index}
-                  className="p-3 bg-muted/50 rounded-md border border-border/50 flex justify-between items-center"
+                  className="p-3 bg-muted/50 rounded-md border flex justify-between items-center"
                 >
                   <div>
-                    <h4 className="font-semibold text-foreground">
-                      {item.name || "Artículo sin nombre"}
-                    </h4>
+                    <h4 className="font-semibold">{item.name}</h4>
                     {item.description && (
                       <p className="text-xs text-muted-foreground">
                         {item.description}
