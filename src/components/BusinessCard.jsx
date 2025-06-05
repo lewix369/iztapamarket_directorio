@@ -21,10 +21,8 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import {
-  categories as allCategories,
-  defaultCategoryIcon,
-} from "@/data/categories.jsx";
+import { categories as allCategories } from "@/data/categories.jsx";
+import { Utensils as defaultCategoryIcon } from "lucide-react";
 
 const BusinessCard = ({ business, className = "" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,15 +70,11 @@ const BusinessCard = ({ business, className = "" }) => {
   }
 
   const categoryDetails = allCategories.find(
-    (cat) =>
-      cat.slug === business.slug_categoria ||
-      cat.dbName === business.slug_categoria
+    (cat) => cat.slug === slug_categoria || cat.dbName === slug_categoria
   );
-  const CategoryIconComponent = categoryDetails
-    ? categoryDetails.icon
-    : defaultCategoryIcon;
+  const CategoryIconComponent = categoryDetails?.icon ?? defaultCategoryIcon;
 
-  const categoryName = categoryDetails?.name || business.slug_categoria;
+  const categoryName = categoryDetails?.name || slug_categoria;
 
   const finalImageUrl =
     images?.[0] ||
