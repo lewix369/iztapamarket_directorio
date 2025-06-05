@@ -8,6 +8,8 @@ import {
   GraduationCap,
   Package,
   MonitorCheck,
+  Car,
+  ShoppingBag,
 } from "lucide-react";
 
 export const categories = [
@@ -36,8 +38,8 @@ export const categories = [
     description: "Ropa, accesorios, calzado y regalos.",
   },
   {
-    name: "Mascotas",
-    slug: "mascotas",
+    name: "Mascotas y Tiendas",
+    slug: "mascotas-y-tiendas",
     icon: Dog,
     description: "Veterinarias, tiendas de mascotas.",
   },
@@ -48,8 +50,8 @@ export const categories = [
     description: "Consultorios, clínicas, remedios y más.",
   },
   {
-    name: "Educación",
-    slug: "educacion",
+    name: "Educación y Escuelas",
+    slug: "educacion-y-escuelas",
     icon: GraduationCap,
     description: "Escuelas, cursos, talleres y más.",
   },
@@ -64,5 +66,23 @@ export const categories = [
     slug: "paqueteria-y-otros",
     icon: Package,
     description: "Mensajería, copias, papelerías y más.",
+  },
+  {
+    name: "Tiendas y Abarrotes",
+    slug: "tiendas-y-abarrotes",
+    icon: ShoppingBag,
+    description: "Abarrotes, tienditas y productos básicos.",
+  },
+  {
+    name: "Otros Negocios",
+    slug: "otros-negocios",
+    icon: Package,
+    description: "Negocios varios y otros giros.",
+  },
+  {
+    name: "Autos y Talleres",
+    slug: "autos-y-talleres",
+    icon: Car,
+    description: "Mecánicos, refacciones y servicios automotrices.",
   },
 ];
