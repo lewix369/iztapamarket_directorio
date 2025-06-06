@@ -8,9 +8,7 @@ import {
   ArrowRight,
   Star,
   MessageCircle,
-  Send,
   ShoppingBag,
-  DollarSign,
   HelpCircle,
 } from "lucide-react";
 import { categories } from "@/data/categories.jsx";
@@ -36,7 +34,7 @@ const HomePage = () => {
 
       const agrupados = {};
       data.forEach((negocio) => {
-        const categoria = negocio.categoria;
+        const categoria = negocio.slug_categoria;
         if (!agrupados[categoria]) agrupados[categoria] = [];
         agrupados[categoria].push(negocio);
       });
@@ -99,7 +97,7 @@ const HomePage = () => {
         alt="IztapaMarket logo"
         className="mx-auto h-28 md:h-36 w-auto mb-6"
       />
-      {/* Sección de búsqueda */}
+
       <section className="py-12 md:py-16 bg-muted/50 rounded-xl">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -127,7 +125,6 @@ const HomePage = () => {
         </motion.div>
       </section>
 
-      {/* Resultados de búsqueda */}
       {searchResults.length > 0 && (
         <section className="py-8">
           <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 text-center">
@@ -140,6 +137,7 @@ const HomePage = () => {
           </div>
         </section>
       )}
+
       {searchResults.length === 0 && searchTerm.trim() !== "" && (
         <section className="py-8">
           <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 text-center">
@@ -153,7 +151,6 @@ const HomePage = () => {
 
       {searchTerm.trim() === "" && searchResults.length === 0 && (
         <>
-          {/* Categorías */}
           <section>
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-8 md:mb-10 text-center">
               Explora por Categoría en Iztapalapa
@@ -190,7 +187,6 @@ const HomePage = () => {
             </div>
           </section>
 
-          {/* Destacados desde Supabase */}
           <section className="py-12 md:py-16 bg-primary/5 rounded-xl">
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-8 md:mb-10 text-center">
               <Star className="inline-block text-yellow-400 mr-2 h-8 w-8" />
@@ -216,7 +212,6 @@ const HomePage = () => {
             )}
           </section>
 
-          {/* Testimonios */}
           <section>
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-8 md:mb-10 text-center">
               <MessageCircle className="inline-block text-primary mr-2 h-8 w-8" />
@@ -236,7 +231,6 @@ const HomePage = () => {
             </div>
           </section>
 
-          {/* Contacto */}
           <section className="py-12 md:py-16 bg-muted/50 rounded-xl text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6 px-4">
               ¿Listo para Empezar o Tienes Preguntas?
