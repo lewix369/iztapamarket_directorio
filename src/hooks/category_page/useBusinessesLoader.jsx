@@ -19,6 +19,8 @@ export const useBusinessesLoader = (slug_categoria) => {
     if (!cleanedSlug) return;
 
     const validSlugs = categories.map((cat) => cat.slug);
+    console.log("✅ Lista de slugs válidos:", validSlugs);
+    console.log("📥 Slug recibido (limpio):", cleanedSlug);
     if (!validSlugs.includes(cleanedSlug)) {
       console.warn("⚠️ Slug inválido:", cleanedSlug);
       setError("Slug de categoría inválido");
@@ -46,7 +48,7 @@ export const useBusinessesLoader = (slug_categoria) => {
         setBusinesses(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("❌ Error al obtener negocios:", err);
-        setError(err.message);
+        setError(err?.message || "Error desconocido");
         setBusinesses([]);
       } finally {
         setIsLoading(false);
