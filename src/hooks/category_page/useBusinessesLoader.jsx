@@ -41,7 +41,7 @@ export const useBusinessesLoader = (slug_categoria) => {
           .select(
             "id, nombre, descripcion, categoria, slug_categoria, direccion, whatsapp, imagen_url, logo_url, web, hours, gallery_images, menu, telefono, plan_type, video_embed_url, mapa_embed_url, created_at, instagram, facebook, services"
           )
-          .eq("slug_categoria", cleanedSlug.toLowerCase()); // ✅ AQUÍ ES DONDE ESTABA EL ERROR
+          .eq("slug_categoria", cleanedSlug.toLowerCase());
 
         if (error) throw error;
 
