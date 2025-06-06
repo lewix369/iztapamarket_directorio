@@ -24,9 +24,11 @@ const CategoriesPage = () => {
                 `🧭 Generando enlace para categoría: ${category.slug}`
               );
               return (
-                <Link to={`/categorias/${category.slug}`} key={category.slug}>
-                  <CategoryCard category={category} />
-                </Link>
+                <CategoryCard
+                  category={category}
+                  key={category.slug}
+                  isFullPage={false}
+                />
               );
             })
           ) : (
