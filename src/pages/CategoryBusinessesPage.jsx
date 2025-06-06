@@ -6,6 +6,7 @@ import BusinessCard from "@/components/BusinessCard";
 
 const CategoryBusinessesPage = () => {
   const { slug } = useParams();
+  console.log("🧩 Slug recibido en CategoryBusinessesPage:", slug);
 
   if (!slug) {
     return (
@@ -18,7 +19,10 @@ const CategoryBusinessesPage = () => {
     );
   }
 
-  const category = categories.find((cat) => cat.slug === slug);
+  const slugString = String(slug).toLowerCase();
+  const category = categories.find(
+    (cat) => cat.slug.toLowerCase() === slugString
+  );
 
   if (!category) {
     return (
@@ -33,7 +37,9 @@ const CategoryBusinessesPage = () => {
     );
   }
 
-  const { businesses, isLoading, error } = useBusinessesLoader(slug);
+  const { businesses, isLoading, error } = useBusinessesLoader(
+    category.slug.toLowerCase()
+  );
 
   return (
     <div className="p-6">
