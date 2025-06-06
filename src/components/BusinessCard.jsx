@@ -77,11 +77,15 @@ const BusinessCard = ({ business, className = "" }) => {
   const categoryName = categoryDetails?.name || slug_categoria;
 
   const finalImageUrl =
-    images?.[0] ||
-    logoUrl ||
-    `https://source.unsplash.com/random/600x400/?business,${encodeURIComponent(
-      categoryName || "abstract"
-    )}&cachebust=${id}`;
+    business.imagen_url && business.imagen_url.startsWith("http")
+      ? business.imagen_url
+      : images?.[0] && images[0].startsWith("http")
+      ? images[0]
+      : logoUrl && logoUrl.startsWith("http")
+      ? logoUrl
+      : `https://source.unsplash.com/random/600x400/?business,${encodeURIComponent(
+          categoryName || "abstract"
+        )}&cachebust=${id}`;
 
   const isValidYoutubeLink = (url) => {
     if (!url) return false;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { categories } from "@/data/categories.jsx";
 
 export const useBusinessesLoader = (slug_categoria) => {
   const [businesses, setBusinesses] = useState([]);
@@ -17,19 +18,7 @@ export const useBusinessesLoader = (slug_categoria) => {
     const cleanedSlug = slug_categoria?.toString().trim().toLowerCase();
     if (!cleanedSlug) return;
 
-    const validSlugs = [
-      "alimentos-y-bebidas",
-      "belleza-y-cuidado-personal",
-      "servicios-del-hogar",
-      "moda-y-tiendas",
-      "mascotas-y-tiendas",
-      "salud-y-bienestar",
-      "educacion-y-escuelas",
-      "otros-negocios",
-      "tiendas-y-abarrotes",
-      "autos-y-talleres",
-      "tecnologia-y-tiendas",
-    ];
+    const validSlugs = categories.map((cat) => cat.slug);
     if (!validSlugs.includes(cleanedSlug)) {
       console.warn("⚠️ Slug inválido:", cleanedSlug);
       setError("Slug de categoría inválido");
