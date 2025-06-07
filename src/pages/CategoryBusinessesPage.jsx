@@ -14,10 +14,11 @@ const slugify = (text) =>
 
 const CategoryBusinessesPage = () => {
   const { slug } = useParams();
+  console.log("📦 Slug crudo desde URL:", slug);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const decodedSlug = slugify(slug);
+    const decodedSlug = slugify(decodeURIComponent(slug));
 
     const exists = categories.some((cat) => slugify(cat.slug) === decodedSlug);
 
@@ -31,6 +32,7 @@ const CategoryBusinessesPage = () => {
 
   const slugString = slugify(slug);
   const category = categories.find((cat) => slugify(cat.slug) === slugString);
+  console.log("✅ Categoría activa:", category);
 
   const fallbackCategory = {
     name: "Negocios",
