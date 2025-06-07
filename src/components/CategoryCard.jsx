@@ -86,8 +86,10 @@ const CategoryCard = ({
       >
         <Link
           to={`/categorias/${category.slug
+            .toString()
             .trim()
             .toLowerCase()
+            .replace(/\s+/g, "-")
             .replace(/\n|\r/g, "")}`}
           className="block h-full"
         >
@@ -108,8 +110,10 @@ const CategoryCard = ({
     >
       <Link
         to={`/categorias/${category.slug
+          .toString()
           .trim()
           .toLowerCase()
+          .replace(/\s+/g, "-")
           .replace(/\n|\r/g, "")}`}
       >
         <Card className="cursor-pointer group bg-card hover:border-primary/50 transition-all duration-200 shadow-md hover:shadow-lg rounded-xl overflow-hidden border border-border/50">
