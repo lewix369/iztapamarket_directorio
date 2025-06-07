@@ -26,6 +26,7 @@ const CategoriesPage = () => {
                 ?.toString()
                 .trim()
                 .toLowerCase()
+                .replace(/\s+/g, "-")
                 .replace(/\n|\r/g, "");
               console.log(`🧭 Generando enlace para categoría: ${cleanedSlug}`);
               return (
