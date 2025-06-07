@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import CategoriesPage from "@/pages/CategoriesPage";
+import CategoriesPage from "@/pages/categorias/index";
 import CategoryBusinessesPage from "@/pages/CategoryBusinessesPage";
 
 function App() {
