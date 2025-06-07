@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { categories } from "@/data/categories.jsx";
+import { categories } from "@/data/categories";
 import CategoryCard from "@/components/CategoryCard";
 import SeoManager from "@/components/SeoManager.jsx";
 
@@ -20,13 +20,16 @@ const CategoriesPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories && categories.length > 0 ? (
             categories.map((category) => {
-              console.log(
-                `🧭 Generando enlace para categoría: ${category.slug}`
-              );
+              const cleanedSlug = category.slug
+                ?.toString()
+                .trim()
+                .toLowerCase()
+                .replace(/\n|\r/g, "");
+              console.log(`🧭 Generando enlace para categoría: ${cleanedSlug}`);
               return (
                 <CategoryCard
-                  category={category}
-                  key={category.slug}
+                  category={{ ...category, slug: cleanedSlug }}
+                  key={cleanedSlug}
                   isFullPage={false}
                 />
               );

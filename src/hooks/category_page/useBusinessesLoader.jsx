@@ -15,19 +15,15 @@ export const useBusinessesLoader = (slug_categoria) => {
       return;
     }
 
-    const cleanedSlug = slug_categoria?.toString().trim().toLowerCase();
+    const cleanedSlug = slug_categoria
+      ?.toString()
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-") // reemplaza espacios múltiples por guion
+      .replace(/\n|\r/g, "");
     if (!cleanedSlug) return;
 
-    const validSlugs = categories.map((cat) => cat.slug);
-    console.log("✅ Lista de slugs válidos:", validSlugs);
     console.log("📥 Slug recibido (limpio):", cleanedSlug);
-    if (!validSlugs.includes(cleanedSlug)) {
-      console.warn("⚠️ Slug inválido:", cleanedSlug);
-      setError("Slug de categoría inválido");
-      setBusinesses([]);
-      setIsLoading(false);
-      return;
-    }
 
     const fetchBusinesses = async () => {
       setIsLoading(true);

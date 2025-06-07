@@ -98,3 +98,5 @@ export const categories = [
     dbName: "autos",
   },
 ];
+
+console.log("✅ Archivo categories.jsx cargado correctamente");
