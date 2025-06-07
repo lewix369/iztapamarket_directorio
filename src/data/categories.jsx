@@ -8,17 +8,13 @@ const CategoryBusinessesPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const decodedSlug = slug ? slugify(slug) : null;
-    if (!decodedSlug) return;
+    const decodedSlug = slugify(slug || "");
 
-    if (decodedSlug) {
-      const exists = categories.some(
-        (cat) => slugify(cat.slug) === decodedSlug
-      );
-      if (!exists) {
-        console.warn("❌ Slug no encontrado en categorías, redirigiendo...");
-        navigate("/categorias", { replace: true });
-      }
+    const exists = categories.some((cat) => slugify(cat.slug) === decodedSlug);
+
+    if (!exists) {
+      console.warn("❌ Slug no encontrado en categorías, redirigiendo...");
+      navigate("/categorias", { replace: true });
     }
   }, [slug, navigate]);
 

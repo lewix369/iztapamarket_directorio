@@ -7,7 +7,16 @@ import { slugify } from "@/utils/slugify";
 
 const CategoriesPage = () => {
   console.log("🟢 Vista CategoriesPage cargada");
-  console.log("📦 Categorías disponibles:", categories);
+  console.log(
+    "📦 Categorías cargadas:",
+    Array.isArray(categories) ? categories.length : "no disponible"
+  );
+
+  if (!Array.isArray(categories) || categories.length === 0) {
+    console.warn(
+      "🚫 Las categorías no están disponibles o el archivo categories.jsx está vacío."
+    );
+  }
 
   return (
     <SeoManager
