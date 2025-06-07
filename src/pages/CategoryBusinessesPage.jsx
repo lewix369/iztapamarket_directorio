@@ -4,22 +4,22 @@ import { categories } from "@/data/categories";
 import { useBusinessesLoader } from "@/hooks/category_page/useBusinessesLoader";
 import BusinessCard from "@/components/BusinessCard";
 
+const slugify = (text) =>
+  decodeURIComponent(text || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/\n|\r/g, "");
+
 const CategoryBusinessesPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const decodedSlug = decodeURIComponent(slug || "")
-      .toString()
-      .trim()
-      .toLowerCase()
-      .replace(/\n|\r/g, "");
+    const decodedSlug = slugify(slug);
 
-    const exists = categories.some(
-      (cat) =>
-        cat.slug?.toString().trim().toLowerCase().replace(/\n|\r/g, "") ===
-        decodedSlug
-    );
+    const exists = categories.some((cat) => slugify(cat.slug) === decodedSlug);
 
     if (!exists) {
       console.warn("❌ Slug no encontrado en categorías, redirigiendo...");
@@ -29,16 +29,8 @@ const CategoryBusinessesPage = () => {
 
   console.log("👉 Slug recibido:", JSON.stringify(slug));
 
-  const slugString = decodeURIComponent(slug)
-    ?.toString()
-    .trim()
-    .toLowerCase()
-    .replace(/\n|\r/g, "");
-  const category = categories.find(
-    (cat) =>
-      cat.slug?.toString().trim().toLowerCase().replace(/\n|\r/g, "") ===
-      slugString
-  );
+  const slugString = slugify(slug);
+  const category = categories.find((cat) => slugify(cat.slug) === slugString);
 
   const fallbackCategory = {
     name: "Negocios",

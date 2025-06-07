@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { categories } from "@/data/categories";
 import CategoryCard from "@/components/CategoryCard";
 import SeoManager from "@/components/SeoManager.jsx";
+import { slugify } from "@/utils/slugify";
 
 const CategoriesPage = () => {
   console.log("🟢 Vista CategoriesPage cargada");
@@ -22,12 +23,7 @@ const CategoriesPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories && categories.length > 0 ? (
             categories.map((category) => {
-              const cleanedSlug = category.slug
-                ?.toString()
-                .trim()
-                .toLowerCase()
-                .replace(/\s+/g, "-")
-                .replace(/\n|\r/g, "");
+              const cleanedSlug = slugify(category.slug);
               console.log(`🧭 Generando enlace para categoría: ${cleanedSlug}`);
               return (
                 <CategoryCard
