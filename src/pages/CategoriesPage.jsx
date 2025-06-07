@@ -31,17 +31,24 @@ const CategoriesPage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories && categories.length > 0 ? (
-            categories.map((category) => {
-              const cleanedSlug = slugify(category.slug);
-              console.log(`🧭 Generando enlace para categoría: ${cleanedSlug}`);
-              return (
-                <CategoryCard
-                  category={{ ...category, slug: cleanedSlug }}
-                  key={cleanedSlug}
-                  isFullPage={false}
-                />
-              );
-            })
+            categories
+              .filter(
+                (category) =>
+                  category?.slug && typeof category.slug === "string"
+              )
+              .map((category) => {
+                const cleanedSlug = slugify(category.slug);
+                console.log(
+                  `🧭 Generando enlace para categoría: ${cleanedSlug}`
+                );
+                return (
+                  <CategoryCard
+                    category={{ ...category, slug: cleanedSlug }}
+                    key={cleanedSlug}
+                    isFullPage={false}
+                  />
+                );
+              })
           ) : (
             <div className="col-span-full text-center py-12">
               <h2 className="text-xl font-semibold text-red-600 mb-2">
